@@ -3,72 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photos - Galactic Memories</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../styles/styles.css">
+    <title>Galactic Memories</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            background: url('https://myastrology.com/wp-content/uploads/2023/06/planets-of-the-solar-system-1.jpg') no-repeat center center fixed; /* Space background image */
+            background-size: cover;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for header */
+            padding: 20px;
+            text-align: center;
+            transition: top 0.3s; /* Smooth transition for header */
+            z-index: 1000; /* Ensure header is above other content */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        h1 {
+            color: blue; /* Title color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+            transition: opacity 1s ease; /* Smooth fade-out effect */
+        }
+
+        h2 {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+        }
+
+        main {
+            padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
-    <button class="toggle-button" aria-label="Toggle Header">☀</button>
-    
-    <header id="main-header">
+    <header id="header">
+        <h1 id="title">Galactic Memories</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="photos.html" class="active">Photos</a></li>
-                <li><a href="albums.html">Albums</a></li>
-                <li><a href="upload.html">Upload</a></li>
-                <li><a href="account.html">Account</a></li>
+                <li><a href="https://galacticmemories.github.io/Galactic-Memories/index.html" target="_self">Home</a></li> <!-- Homepage link -->
+                <li><a href="https://galacticmemories.github.io/Galactic-Memories/albums.html" target="_self">Albums</a></li> <!-- Replace with actual URL -->
+                <li><a href="https://galacticmemories.github.io/Galactic-Memories/photos.html" target="_self">Photos</a></li> <!-- Replace with actual URL -->
+                <li><a href="https://galacticmemories.github.io/Galactic-Memories/account.html" target="_self">Account</a></li> <!-- Replace with actual URL -->
+                <li><a href="https://galacticmemories.github.io/Galactic-Memories/upload.html" target="_self">Upload</a></li> <!-- Replace with actual URL -->
             </ul>
         </nav>
     </header>
-
     <main>
-        <section class="photos-grid">
-            <div class="photo-item">
-                <img src="https://source.unsplash.com/random/400x400/?galaxy" alt="Galaxy Photo">
-                <div class="photo-info">
-                    <h3>Andromeda Galaxy</h3>
-                    <p>Captured: 2023-10-15</p>
-                </div>
-            </div>
-            <div class="photo-item">
-                <img src="https://source.unsplash.com/random/400x400/?nebula" alt="Nebula Photo">
-                <div class="photo-info">
-                    <h3>Orion Nebula</h3>
-                    <p>Captured: 2023-10-14</p>
-                </div>
-            </div>
-            <div class="photo-item">
-                <img src="https://source.unsplash.com/random/400x400/?stars" alt="Stars Photo">
-                <div class="photo-info">
-                    <h3>Star Cluster</h3>
-                    <p>Captured: 2023-10-13</p>
-                </div>
-            </div>
-            <div class="photo-item">
-                <img src="https://source.unsplash.com/random/400x400/?planet" alt="Planet Photo">
-                <div class="photo-info">
-                    <h3>Saturn Rings</h3>
-                    <p>Captured: 2023-10-12</p>
-                </div>
-            </div>
-            <div class="photo-item">
-                <img src="https://source.unsplash.com/random/400x400/?moon" alt="Moon Photo">
-                <div class="photo-info">
-                    <h3>Lunar Surface</h3>
-                    <p>Captured: 2023-10-11</p>
-                </div>
-            </div>
-            <div class="photo-item">
-                <img src="https://source.unsplash.com/random/400x400/?comet" alt="Comet Photo">
-                <div class="photo-info">
-                    <h3>Halley's Comet</h3>
-                    <p>Captured: 2023-10-10</p>
-                </div>
-            </div>
-        </section>
+        <h2>Description</h2>
+        <p>Galactic Memories is a web application that allows users to create, manage, and share their photo albums. Users can upload photos, view albums, and manage their accounts.</p>
+        
+        <h2>Features</h2>
+        <ul>
+            <li>User account management</li>
+            <li>Upload photos to albums</li>
+            <li>View and manage photo albums</li>
+            <li>Responsive design for mobile and laptop</li>
+        </ul>
+
+        <h2>Usage</h2>
+        <ul>
+            <li>To upload photos, navigate to the upload page.</li>
+            <li>View your albums on the albums page.</li>
+            <li>Manage your account settings on the account page.</li>
+        </ul>
+
+        <h2>Contributing</h2>
+        <p>Contributions are welcome! Please open an issue or submit a pull request for any improvements or features.</p>
+
+        <h2>License</h2>
+        <p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
     </main>
 
-    <script src="../../scripts/scripts.js"></script>
-</body>
-</html>
+    <script
