@@ -7,18 +7,7 @@ Galacric Memories is a web application that allows users to create, manage, and 
 - User account management
 - Upload photos to albums
 - View and manage photo albums
-- Responsive design for mobile and desktop
-
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/khloe-memories.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd khloe-memories
-   ```
-3. Open the `index.html` file in your web browser to view the application.
+- Responsive design for mobile and laptop
 
 ## Usage
 - To upload photos, navigate to the upload page.
