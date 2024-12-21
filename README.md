@@ -10,7 +10,7 @@
             padding: 0;
             font-family: Arial, sans-serif;
             color: white;
-            background: url('https://example.com/space-background.jpg') no-repeat center center fixed; /* Replace with your space image URL */
+            background: url('https://facts.net/wp-content/uploads/2023/08/13-enigmatic-facts-about-cosmic-evolution-1692961685.jpg') no-repeat center center fixed; /* Space background image */
             background-size: cover;
         }
 
@@ -54,11 +54,11 @@
         <h1>Galactic Memories</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="albums.html">Albums</a></li>
-                <li><a href="photos.html">Photos</a></li>
-                <li><a href="account.html">Account</a></li>
-                <li><a href="upload.html">Upload</a></li>
+                <li><a href="https://example.com/home" target="_blank">Home</a></li>
+                <li><a href="https://example.com/albums" target="_blank">Albums</a></li>
+                <li><a href="https://example.com/photos" target="_blank">Photos</a></li>
+                <li><a href="https://example.com/account" target="_blank">Account</a></li>
+                <li><a href="https://example.com/upload" target="_blank">Upload</a></li>
             </ul>
         </nav>
     </header>
