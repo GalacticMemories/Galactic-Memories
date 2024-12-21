@@ -1,4 +1,4 @@
-# Galactic Memories
+Galactic Memories
 
 ## Description
 Galacric Memories is a web application that allows users to create, manage, and share their photo albums. Users can upload photos, view albums, and manage their accounts.
