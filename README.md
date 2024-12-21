@@ -19,7 +19,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background: transparent; /* Make header background transparent */
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for header */
             padding: 20px;
             text-align: center;
             z-index: 1000; /* Ensure header is above other content */
@@ -87,16 +87,4 @@
                 <li><a href="https://galacticmemories.github.io/Galactic-Memories/albums.html" target="_self">Albums</a></li>
                 <li><a href="https://galacticmemories.github.io/Galactic-Memories/photos.html" target="_self">Photos</a></li>
                 <li><a href="https://galacticmemories.github.io/Galactic-Memories/account.html" target="_self">Account</a></li>
-                <li><a href="https://galacticmemories.github.io/Galactic-Memories/upload.html" target="_self">Upload</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <h2>Description</h2>
-        <p>Galactic Memories is a web application that allows users to create, manage, and share their photo albums. Users can upload photos, view albums, and manage their accounts.</p>
-        
-        <h2>Features</h2>
-        <ul>
-            <li>User account management</li>
-            <li>Upload photos to albums</
+                <li><a href="https://galacticmem
