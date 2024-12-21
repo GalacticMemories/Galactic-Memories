@@ -104,7 +104,4 @@
         <h2>Description</h2>
         <p>Galactic Memories is an innovative web application designed to help users effortlessly create, manage, and share their photo albums. The platform serves as a digital scrapbook, allowing users to store and organize their cherished memories in a visually appealing and user-friendly environment.</p>
         
-        <p>Upon entering the site, users are greeted with a stunning cosmic-themed background that sets the tone for a journey through their personal memories. The interface is clean and intuitive, making navigation simple for users of all ages. The homepage features a prominent title, "Galactic Memories," and a navigation menu that provides easy access to various functionalities, including:</p>
-        
-        <h3>1. User Account Management</h3>
-       
+        <p>Upon entering the site, users are greeted with a stunning cosmic-themed background that sets the tone for a journey through their personal memories. The interface is clean and intuitive, making
