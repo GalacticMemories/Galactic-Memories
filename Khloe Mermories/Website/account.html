@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - Galactic Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/styles.css">
+</head>
+<body>
+    <button class="toggle-button" aria-label="Toggle Header">☀</button>
+    
+    <header id="main-header">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="albums.html">Albums</a></li>
+                <li><a href="upload.html">Upload</a></li>
+                <li><a href="account.html" class="active">Account</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="account-section">
+            <div class="account-container">
+                <div class="profile-header">
+                    <div class="profile-picture">
+                        <img id="profilePic" src="https://source.unsplash.com/random/150x150/?avatar" alt="Profile Picture">
+                        <label for="profilePicInput" class="change-picture">Change Picture</label>
+                        <input type="file" id="profilePicInput" accept="image/*" style="display: none;">
+                    </div>
+                    <div class="profile-info">
+                        <h2>Account Settings</h2>
+                        <p class="storage-info">Storage Used: 2.4GB / 5GB</p>
+                        <div class="storage-bar">
+                            <div class="storage-used" style="width: 48%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="accountForm" class="account-form">
+                    <div class="form-group">
+                        <label for="nameInput">Display Name</label>
+                        <input type="text" id="nameInput" placeholder="Enter your display name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailInput">Email</label>
+                        <input type="email" id="emailInput" placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passwordInput">Password</label>
+                        <input type="password" id="passwordInput" placeholder="Enter new password">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Theme Preference</label>
+                        <div class="theme-options">
+                            <label class="theme-option">
+                                <input type="radio" name="theme" value="dark" checked>
+                                <span>Dark Theme</span>
+                            </label>
+                            <label class="theme-option">
+                                <input type="radio" name="theme" value="light">
+                                <span>Light Theme</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Privacy Settings</label>
+                        <div class="privacy-options">
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="publicProfile" checked>
+                                <span>Public Profile</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="showLocation">
+                                <span>Show Photo Locations</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="emailNotifications" checked>
+                                <span>Email Notifications</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="account-actions">
+                        <button type="button" class="delete-account">Delete Account</button>
+                        <button type="submit" class="save-changes">Save Changes</button>
+                    </div>
+                </form>
+
+                <div class="account-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">128</span>
+                        <span class="stat-label">Photos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">12</span>
+                        <span class="stat-label">Albums</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">1.2K</span>
+                        <span class="stat-label">Views</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Profile picture upload
+        const profilePicInput = document.getElementById('profilePicInput');
+        const profilePic = document.getElementById('profilePic');
+
+        profilePicInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    profilePic.src = e.target.result;
+                    localStorage.setItem('profilePic', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Form submission
+        const accountForm = document.getElementById('accountForm');
+        accountForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = {
+                name: document.getElementById('nameInput').value,
+                email: document.getElementById('emailInput').value,
+                theme: document.querySelector('input[name="theme"]:checked').value,
+                publicProfile: document.getElementById('publicProfile').checked,
+                showLocation: document.getElementById('showLocation').checked,
+                emailNotifications: document.getElementById('emailNotifications').checked
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('accountSettings', JSON.stringify(formData));
+            alert('Changes saved successfully!');
+        });
+
+        // Delete account confirmation
+        document.querySelector('.delete-account').addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                // Simulate account deletion
+                localStorage.clear();
+                alert('Account deleted successfully');
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Load saved settings
+        const savedSettings = localStorage.getItem('accountSettings');
+        if (savedSettings) {
+            const settings = JSON.parse(savedSettings);
+            document.getElementById('nameInput').value = settings.name || '';
+            document.getElementById('emailInput').value = settings.email || '';
+            document.querySelector(`input[name="theme"][value="${settings.theme}"]`).checked = true;
+            document.getElementById('publicProfile').checked = settings.publicProfile;
+            document.getElementById('showLocation').checked = settings.showLocation;
+            document.getElementById('emailNotifications').checked = settings.emailNotifications;
+        }
+
+        // Load saved profile picture
+        const savedProfilePic = localStorage.getItem('profilePic');
+        if (savedProfilePic) {
+            profilePic.src = savedProfilePic;
+        }
+    </script>
+    <script src="../../scripts/scripts.js"></script>
+</body>
+</html>
