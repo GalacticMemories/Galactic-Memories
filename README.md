@@ -19,11 +19,11 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for header */
+            background: transparent; /* Make header background transparent */
             padding: 20px;
             text-align: center;
-            transition: top 0.3s; /* Smooth transition for header */
             z-index: 1000; /* Ensure header is above other content */
+            display: none; /* Initially hide the header */
         }
 
         nav ul {
@@ -42,38 +42,56 @@
         }
 
         h1 {
-            color: blue; /* Title color */
+            color: white; /* Change title color to white */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
-            transition: opacity 1s ease; /* Smooth fade-out effect */
         }
 
-        h2 {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+        .toggle-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: yellow; /* Yellow sun button */
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 1001; /* Ensure button is above other content */
+        }
+
+        .black-box {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            display: none; /* Initially hide the black box */
         }
 
         main {
             padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
         }
-
-        ul {
-            margin: 0;
-            padding-left: 20px;
-        }
     </style>
 </head>
 <body>
+    <button class="toggle-button" onclick="toggleHeader()">☀️</button> <!-- Yellow sun button -->
+    
     <header id="header">
         <h1 id="title">Galactic Memories</h1>
         <nav>
             <ul>
-                <li><a href="https://example.com/home" target="_blank">Home</a></li>
-                <li><a href="https://example.com/albums" target="_blank">Albums</a></li>
-                <li><a href="photos.html">Photos</a></li>
-                <li><a href="https://example.com/account" target="_blank">Account</a></li>
-                <li><a href="https://example.com/upload" target="_blank">Upload</a></li>
+                <li><a href="https://galacticmemories.github.io/Galactic-Memories/index.html" target="_self">Home</a></li>
+                <li><a href="https://galacticmemories.github.io/Galactic-Memories/albums.html" target="_self">Albums</a></li>
+                <li><a href="https://galacticmemories.github.io/Galactic-Memories/photos.html" target="_self">Photos</a></li>
+                <li><a href="https://galacticmemories.github.io/Galactic-Memories/account.html" target="_self">Account</a></li>
+                <li><a href="https://galacticmemories.github.io/Galactic-Memories/upload.html" target="_self">Upload</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
         <h2>Description</h2>
         <p>Galactic Memories is a web application that allows users to create, manage, and share their photo albums. Users can upload photos, view albums, and manage their accounts.</p>
@@ -81,28 +99,4 @@
         <h2>Features</h2>
         <ul>
             <li>User account management</li>
-            <li>Upload photos to albums</li>
-            <li>View and manage photo albums</li>
-            <li>Responsive design for mobile and laptop</li>
-        </ul>
-
-        <h2>Usage</h2>
-        <ul>
-            <li>To upload photos, navigate to the upload page.</li>
-            <li>View your albums on the albums page.</li>
-            <li>Manage your account settings on the account page.</li>
-        </ul>
-
-        <h2>Contributing</h2>
-        <p>Contributions are welcome! Please open an issue or submit a pull request for any improvements or features.</p>
-
-        <h2>License</h2>
-        <p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
-    </main>
-
-    <script>
-        // JavaScript for header visibility on scroll
-        let lastScrollTop = 0;
-        const header = document.getElementById('header');
-
-        window.addEventListener('scroll', function()
+            <li>Upload photos to albums</
