@@ -3,8 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
     <title>Galactic Memories</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            background: url('https://example.com/space-background.jpg') no-repeat center center fixed; /* Replace with your space image URL */
+            background-size: cover;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for header */
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        h1, h2 {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
