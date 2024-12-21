@@ -1,7 +1,7 @@
-# Khloe Memories
+# Galactic Memories
 
 ## Description
-Khloe Memories is a web application that allows users to create, manage, and share their photo albums. Users can upload photos, view albums, and manage their accounts.
+Galacric Memories is a web application that allows users to create, manage, and share their photo albums. Users can upload photos, view albums, and manage their accounts.
 
 ## Features
 - User account management
