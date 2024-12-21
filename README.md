@@ -23,7 +23,7 @@
             padding: 20px;
             text-align: center;
             z-index: 1000; /* Ensure header is above other content */
-            display: none; /* Initially hide the header */
+            transition: top 0.3s; /* Smooth transition for header */
         }
 
         nav ul {
@@ -78,10 +78,14 @@
         p {
             margin: 20px 0; /* Add margin for better spacing */
         }
+
+        h2 {
+            margin-top: 40px; /* Add margin for section titles */
+        }
     </style>
 </head>
 <body>
-    <button class="toggle-button" onclick="toggleHeader()">☀️</button> <!-- Yellow sun button -->
+    <button class="toggle-button" onclick="toggleBlackBox()">☀️</button> <!-- Yellow sun button -->
     
     <header id="header">
         <h1 id="title">Galactic Memories</h1>
@@ -98,8 +102,9 @@
 
     <main>
         <h2>Description</h2>
-        <p>Galactic Memories is a web application designed to help users create, manage, and share their photo albums in a visually appealing and user-friendly environment. The platform allows users to upload their cherished memories, organize them into albums, and share them with friends and family. With a focus on simplicity and accessibility, Galactic Memories aims to provide a seamless experience for users of all ages.</p>
+        <p>Galactic Memories is an innovative web application designed to help users effortlessly create, manage, and share their photo albums. The platform serves as a digital scrapbook, allowing users to store and organize their cherished memories in a visually appealing and user-friendly environment.</p>
         
-        <p>The application features a clean and modern interface, making it easy for users to navigate through their galleries. Users can create multiple albums, each containing a collection of photos that can be easily uploaded from their devices. The upload process is straightforward, allowing users to select multiple images at once, ensuring that they can quickly add new memories to their collections.</p>
+        <p>Upon entering the site, users are greeted with a stunning cosmic-themed background that sets the tone for a journey through their personal memories. The interface is clean and intuitive, making navigation simple for users of all ages. The homepage features a prominent title, "Galactic Memories," and a navigation menu that provides easy access to various functionalities, including:</p>
         
-        <p>In addition to personal
+        <h3>1. User Account Management</h3>
+       
