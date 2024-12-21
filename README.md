@@ -41,7 +41,13 @@
             text-decoration: none;
         }
 
-        h1, h2 {
+        h1 {
+            color: blue; /* Title color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+            transition: opacity 1s ease; /* Smooth fade-out effect */
+        }
+
+        h2 {
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
         }
 
@@ -57,7 +63,7 @@
 </head>
 <body>
     <header id="header">
-        <h1>Galactic Memories</h1>
+        <h1 id="title">Galactic Memories</h1>
         <nav>
             <ul>
                 <li><a href="https://example.com/home" target="_blank">Home</a></li>
@@ -99,14 +105,4 @@
         let lastScrollTop = 0;
         const header = document.getElementById('header');
 
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop) {
-                header.style.top = "-100px"; // Hide header
-            } else {
-                header.style.top = "0"; // Show header
-            }
-            lastScrollTop = scrollTop;
-        });
-
-        //
+        window.addEventListener('scroll', function()
