@@ -10,14 +10,20 @@
             padding: 0;
             font-family: Arial, sans-serif;
             color: white;
-            background: url('https://facts.net/wp-content/uploads/2023/08/13-enigmatic-facts-about-cosmic-evolution-1692961685.jpg') no-repeat center center fixed; /* Space background image */
+            background: url('https://myastrology.com/wp-content/uploads/2023/06/planets-of-the-solar-system-1.jpg') no-repeat center center fixed; /* Space background image */
             background-size: cover;
         }
 
         header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for header */
             padding: 20px;
             text-align: center;
+            transition: top 0.3s; /* Smooth transition for header */
+            z-index: 1000; /* Ensure header is above other content */
         }
 
         nav ul {
@@ -40,7 +46,7 @@
         }
 
         main {
-            padding: 20px;
+            padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
         }
 
         ul {
@@ -50,13 +56,13 @@
     </style>
 </head>
 <body>
-    <header>
+    <header id="header">
         <h1>Galactic Memories</h1>
         <nav>
             <ul>
                 <li><a href="https://example.com/home" target="_blank">Home</a></li>
                 <li><a href="https://example.com/albums" target="_blank">Albums</a></li>
-                <li><a href="https://example.com/photos" target="_blank">Photos</a></li>
+                <li><a href="photos.html">Photos</a></li>
                 <li><a href="https://example.com/account" target="_blank">Account</a></li>
                 <li><a href="https://example.com/upload" target="_blank">Upload</a></li>
             </ul>
@@ -87,5 +93,20 @@
         <h2>License</h2>
         <p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
     </main>
-</body>
-</html>
+
+    <script>
+        // JavaScript for header visibility on scroll
+        let lastScrollTop = 0;
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.style.top = "-100px"; // Hide header
+            } else {
+                header.style.top = "0"; // Show header
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        //
