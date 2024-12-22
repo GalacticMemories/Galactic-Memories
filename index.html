@@ -116,8 +116,8 @@
             color: white;
             text-align: center;
             padding: 10px;
-            position: relative
-                        bottom: 0;
+            position: relative;
+            bottom:            0;
             width: 100%;
             margin-top: 20px;
         }
@@ -171,7 +171,7 @@
     </style>
 </head>
 <body>
-    <header id="main-header">
+        <header id="main-header">
         <nav>
             <ul>
                 <li><a href="index.html" class="active">Home</a></li>
@@ -207,11 +207,11 @@
         <!-- Overlay for the admin prompt -->
         <div class="overlay" id="adminOverlay">
             <div class="prompt-content">
-                <h2>Admin Login</h2>
+                                <h2>Admin Login</h2>
                 <form id="adminForm">
                     <div class="form-group">
                         <label for="usernameInput">Username</label>
-                                                <input type="text" id="usernameInput" placeholder="Enter username" required>
+                        <input type="text" id="usernameInput" placeholder="Enter username" required>
                     </div>
                     <div class="form-group">
                         <label for="passwordInput">Password</label>
@@ -227,7 +227,8 @@
     </main>
 
     <footer>
-        <p>&copy; 2023 Galactic Memories. All rights reserved.</p>
+        <p>&copy; 2024 Galactic Memories. All rights reserved.</p> <!-- Updated year -->
+        <p>Licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.</p> <!-- Licensing information -->
     </footer>
 
     <script>
@@ -281,7 +282,7 @@
 
             // Update profile picture or initials
             const profilePicture = localStorage.getItem('profilePicture');
-            const username = localStorage.getItem('currentUser   '); // Ensure this matches your storage key
+            const username = localStorage.getItem('currentUser '); // Ensure this matches your storage key
             const initials = username ? username.charAt(0).toUpperCase() : '?'; // Get initials
 
             const profileLink = document.querySelector('.profile-link img');
