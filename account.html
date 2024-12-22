@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - Galactic Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://images.hdqwalls.com/download/nebula-planet-space-2n-3840x2400.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            overflow-x: hidden;
+        }
+        #main-header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        main {
+            padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
+            text-align: center; /* Center align text */
+        }
+        h2 {
+            font-family: 'Cinzel', serif; /* Elegant font for headings */
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 10px 0;
+            max-width: 800px; /* Limit width for better readability */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .photo-list {
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .photo-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .photo-item:last-child {
+            border-bottom: none;
+        }
+        .view-button {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .view-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="albums.html">Albums</a></li>
+                <li><a href="upload.html">Upload</a></li>
+                <li><a href="account.html" class="active">Account</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your Account</h2>
+        <p>Welcome to your account page! Here you can manage your uploaded photos and view your albums.</p>
+
+        <div class="photo-list">
+            <h3>Your Uploaded Photos</h3>
+            <div class="photo-item">
+                Photo 1: <a href="link_to_photo_1.jpg" target="_blank" class="view-button">View</a>
+            </div>
+            <div class="photo-item">
+                Photo 2: <a href="link_to_photo_2.jpg" target="_blank" class="view-button">View</a>
+                        <div class="photo-item">
+                Photo 3: <a href="link_to_photo_3.jpg" target="_blank" class="view-button">View</a>
+            </div>
+            <div class="photo-item">
+                Photo 4: <a href="link_to_photo_4.jpg" target="_blank" class="view-button">View</a>
+            </div>
+            <div class="photo-item">
+                Photo 5: <a href="link_to_photo_5.jpg" target="_blank" class="view-button">View</a>
+            </div>
+            <!-- Add more photos as needed -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Galactic Memories. All rights reserved.</p>
+    </footer>
+</body>
+</html>
