@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos - Galactic Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            background: url('https://wallpapertag.com/wallpaper/full/7/c/d/422298-hd-universe-wallpaper-3200x2000-full-hd.jpg') no-repeat center center fixed; /* Universe background image */
+            background-size: cover;
+            overflow-x: hidden;
+        }
+        #main-header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        h1 {
+            color: blue; /* Title color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+            margin: 0;
+        }
+        h2 {
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+            margin-top: 40px;
+        }
+        main {
+            padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
+            text-align: center; /* Center align text */
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .upload-section {
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            width: 300px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            margin: 10px;
+            border: 2px solid white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .gallery-item img, .gallery-item video {
+            max-width: 200px;
+            max-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <h1>Galactic Memories</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photos.html" class="active">Photos</a></li>
+                <li><a href="albums.html">Albums</a></li>
+                <li><a href="upload.html">Upload</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="https://galacticmemories.github.io/Universe-Dreams" target="_blank">Universe Dreams</a></li>
+                <li><a href="https://galacticmemories.github.io/Space-memories-/index.html" target="_blank">Space Memories</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Photos</h2>
+                <p>Welcome to the Photos section of Galactic Memories! Here you can upload and view your photos and videos.</p>
+
+        <div class="upload-section">
+            <h3>Upload Photo/Video</h3>
+            <input type="file" id="fileInput" accept="image/*,video/*" />
+            <button id="uploadButton">Upload</button>
+        </div>
+
+        <div class="gallery" id="gallery">
+            <!-- Uploaded photos and videos will be displayed here -->
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Galactic Memories. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const uploadButton = document.getElementById('uploadButton');
+        const fileInput = document.getElementById('fileInput');
+        const gallery = document.getElementById('gallery');
+
+        uploadButton.addEventListener('click', function() {
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.classList.add('gallery-item');
+
+                    if (file.type.startsWith('image/')) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        galleryItem.appendChild(img);
+                    } else if (file.type.startsWith('video/')) {
+                        const video = document.createElement('video');
+                        video.src = e.target.result;
+                        video.controls = true; // Add controls for video playback
+                        galleryItem.appendChild(video);
+                    }
+
+                    gallery.appendChild(galleryItem);
+                    fileInput.value = ''; // Clear the input
+                };
+                reader.readAsDataURL(file); // Read the file as a data URL
+            } else {
+                alert('Please select a file to upload.');
+            }
+        });
+    </script>
+</body>
+</html>
