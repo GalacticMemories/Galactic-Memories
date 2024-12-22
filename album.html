@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums - Galactic Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif; /* Professional font */
+            background-image: url('https://ugc.futurelearn.com/uploads/images/7a/1a/7a1aec47-8310-4f1a-887c-3afa46c72495.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            overflow-x: hidden;
+        }
+        #main-header {
+            background-color: rgba(0, 0, 0, 0.8); /* Darker for better contrast */
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            transition: top 0.3s, background-color 0.3s; /* Smooth transitions */
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s; /* Smooth color transition */
+        }
+        nav ul li a:hover {
+            color: #FFD700; /* Gold color on hover */
+        }
+        main {
+            padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
+            text-align: center; /* Center align text */
+            animation: fadeIn 1s; /* Fade-in animation for main content */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h2 {
+            font-family: 'Cinzel', serif; /* Elegant font for headings */
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 10px 0;
+            max-width: 800px; /* Limit width for better readability */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="albums.html" class="active">Albums</a></li> <!-- Active link for Albums -->
+                <li><a href="upload.html">Upload</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your Albums</h2>
+        <p>Welcome to your albums! Here you can view and manage all your photo albums. Create new albums, organize your photos, and share your memories with friends and family.</p>
+
+        <h2>Featured Albums</h2>
+        <p>Check out some of the featured albums below:</p>
+        <ul>
+            <li>Summer Vacation 2023</li>
+            <li>Family Reunion</li>
+            <li>Core Memories</li> <!-- Updated album name -->
+            <li>Birthday Celebrations</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Galactic Memories. All rights reserved.</p> <!-- Updated year -->
+        <p>Licensed under the Creative Commons Attribution-
