@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Galactic Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif; /* Use the same font as the homepage */
+            background-image: url('https://www.pixelstalk.net/wp-content/uploads/2016/08/Universe-galaxy-wallpaper.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .user-list, .media-list {
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .user-list h2, .media-list h2 {
+            margin: 0;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .user-item, .media-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .user-item:last-child, .media-item:last-child {
+            border-bottom: none;
+        }
+        .download-button {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="albums.html">Albums</a></li>
+                <li><a href="upload.html">Upload</a></li>
+                <li><a href="account.html">Account</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Welcome, Admin!</h2>
+        <p>Here you can manage users and view uploaded media.</p>
+
+        <!-- Section for displaying users -->
+        <div class="user-list">
+            <h2>Registered Users</h2>
+            <div class="user-item">
+                User 1 
+                <a href="download.php?user_id=1" class="download-button">Download Gallery</a>
+            </div>
+            <div class="user-item">
+                User 2 
+                <a href="download.php?user_id=2" class="download-button">Download Gallery</a>
+            </div>
+            <div class="user-item">
+                User 3 
+                <a href="download.php?user_id=3" class="download-button">Download Gallery</a>
+            </div>
+            <!-- Add more users as needed -->
+        </div>
+
+        <!-- Section for displaying media -->
+        <div class="media-list">
+            <h2>Uploaded Media</h2>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Galactic Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif; /* Use the same font as the homepage */
+            background-image: url('https://www.pixelstalk.net/wp-content/uploads/2016/08/Universe-galaxy-wallpaper.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .user-list, .media-list {
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .user-list h2, .media-list h2 {
+            margin: 0;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .user-item, .media-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .user-item:last-child, .media-item:last-child {
+            border-bottom: none;
+        }
+        .download-button {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="albums.html">Albums</a></li>
+                <li><a href="upload.html">Upload</a></li>
+                <li><a href="account.html">Account</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Welcome, Admin!</h2>
+        <p>Here you can manage users and view uploaded media.</p>
+
+        <!-- Section for displaying users -->
+        <div class="user-list">
+            <h2>Registered Users</h2>
+            <div class="user-item">
+                User 1 
+                <a href="download.php?user_id=1" class="download-button">Download Gallery</a>
+            </div>
+            <div class="user-item">
+                User 2 
+                <a href="download.php?user_id=2" class="download-button">Download Gallery</a>
+            </div>
+            <div class="user-item">
+                User 3 
+                <a href="download.php?user_id=3" class="download-button">Download Gallery</a>
+            </div>
+            <!-- Add more users as needed -->
+        </div>
+
+        <!-- Section for displaying media -->
+        <div class="media-list">
+            <h2>Uploaded Media</h2>
+                        <div class="media-item">Photo 1: <a href="link_to_photo_1.jpg" target="_blank">View</a></div>
+            <div class="media-item">Photo 2: <a href="link_to_photo_2.jpg" target="_blank">View</a></div>
+            <div class="media-item">Video 1: <a href="link_to_video_1.mp4" target="_blank">Watch</a></div>
+            <!-- Add more media as needed -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Galactic Memories. All rights reserved.</p>
+    </footer>
+</body>
+</html>
