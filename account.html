@@ -97,31 +97,17 @@
     </header>
 
     <main>
-        <h2>Sign Up / Login</h2>
-        <div id="loginForm">
-            <h3>Login</h3>
+        <h2>Sign In</h2>
+        <div id="signinForm">
             <div class="form-group">
-                <label for="loginUsername">Username</label>
-                <input type="text" id="loginUsername" placeholder="Enter your username" required>
+                <label for="signinUsername">Username</label>
+                <input type="text" id="signinUsername" placeholder="Enter your username" required>
             </div>
             <div class="form-group">
-                <label for="loginPassword">Password</label>
-                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                <label for="signinPassword">Password</label>
+                <input type="password" id="signinPassword" placeholder="Enter your password" required>
             </div>
-            <button class="submit-button" id="loginButton">Login</button>
-        </div>
-
-        <div id="signupForm">
-            <h3>Sign Up</h3>
-            <div class="form-group">
-                <label for="signupUsername">Username</label>
-                               <input type="text" id="signupUsername" placeholder="Choose a username" required>
-            </div>
-            <div class="form-group">
-                <label for="signupPassword">Password</label>
-                <input type="password" id="signupPassword" placeholder="Choose a password" required>
-            </div>
-            <button class="submit-button" id="signupButton">Sign Up</button>
+            <button class="submit-button" id="signinButton">Sign In</button>
         </div>
     </main>
 
@@ -130,40 +116,19 @@
     </footer>
 
     <script>
-        // Function to handle user sign-up
-        document.getElementById('signupButton').addEventListener('click', function() {
-            const username = document.getElementById('signupUsername').value;
-            const password = document.getElementById('signupPassword').value;
-
-            // Check if the username already exists
-            let users = JSON.parse(localStorage.getItem('users')) || [];
-            const userExists = users.some(user => user.username === username);
-
-            if (userExists) {
-                alert('Username already exists. Please choose a different username.');
-            } else {
-                // Add new user to the users array
-                users.push({ username, password });
-                localStorage.setItem('users', JSON.stringify(users));
-                alert('Sign up successful! You can now log in.');
-                document.getElementById('signupUsername').value = '';
-                document.getElementById('signupPassword').value = '';
-            }
-        });
-
-        // Function to handle user login
-        document.getElementById('loginButton').addEventListener('click', function() {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
+                // Function to handle user sign-in
+        document.getElementById('signinButton').addEventListener('click', function() {
+            const username = document.getElementById('signinUsername').value;
+            const password = document.getElementById('signinPassword').value;
 
             // Retrieve users from local storage
             let users = JSON.parse(localStorage.getItem('users')) || [];
             const user = users.find(user => user.username === username && user.password === password);
 
             if (user) {
-                alert('Login successful!');
-                // Redirect to the admin page or another page
-                window.location.href = 'admin.html'; // Change this to the desired page
+                alert('Sign in successful!');
+                // Redirect to the profile page
+                window.location.href = 'profile.html'; // Redirect to profile page
             } else {
                 alert('Invalid username or password. Please try again.');
             }
