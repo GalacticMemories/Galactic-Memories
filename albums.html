@@ -47,19 +47,30 @@
             font-size: 2.5em;
             margin: 20px 0;
         }
+        .album-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 1200px; /* Limit the width of the album container */
+        }
         .album {
             margin: 20px;
             padding: 20px;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            display: inline-block;
-            width: 300px;
-            vertical-align: top;
+            width: 300px; /* Fixed width for each album */
+            text-align: center; /* Center align text in album */
         }
         .album img {
             width: 100%;
             border-radius: 5px;
+        }
+        .edit-icon {
+            cursor: pointer;
+            margin-left: 5px;
+            font-size: 1.2em; /* Increase size of the pencil emoji */
         }
         footer {
             background-color: rgba(0, 0, 0, 0.8);
@@ -88,60 +99,73 @@
 
     <main>
         <h2>Your Albums</h2>
-        <div class="album">
-            <img src="https://via.placeholder.com/300" alt="Album Cover">
-            <h3>Album Title 1</h3>
-            <p>Description of Album 1.</p>
-        </div>
-        <div class="album">
-            <img src="https://via.placeholder.com/300" alt="Album Cover">
-            <h3>Album Title 2</h3>
-            <p>Description of Album 2.</p>
-        </div>
-        <div class="album">
-            <img src="https://via.placeholder.com/300" alt="Album Cover">
-            <h3>Album Title 3</h3>
-            <p>Description of Album 3.</p>
-        </div>
-        <div class="album">
-            <img src="https://via.placeholder.com/300" alt="Album Cover">
-            <h3>Album Title 4</h3>
-            <p>Description of Album 4.</p>
-        </div>
-        <div class="album">
-            <img src="https://via.placeholder.com/300" alt="Album Cover">
-            <h3>Album Title 5</h3>
-            <p>Description of Album 5.</p>
-</div>
-        <div class="album">
-            <img src="https://via.placeholder.com/300" alt="Album Cover">
-            <h3>Album Title 6</h3>
-            <p>Description of Album 6.</p>
-        </div>
-        <div class="album">
-            <img src="https://via.placeholder.com/300" alt="Album Cover">
-            <h3>Album Title 7</h3>
-            <p>Description of Album 7.</p>
-        </div>
-        <div class="album">
-            <img src="https://via.placeholder.com/300" alt="Album Cover">
-            <h3>Album Title 8</h3>
-            <p>Description of Album 8.</p>
-        </div>
-        <div class="album">
-            <img src="https://via.placeholder.com/300" alt="Album Cover">
-            <h3>Album Title 9</h3>
-            <p>Description of Album 9.</p>
-        </div>
-        <div class="album">
-            <img src="https://via.placeholder.com/300" alt="Album Cover">
-            <h3>Album Title 10</h3>
-            <p>Description of Album 10.</p>
+        <div class="album-container">
+            <div class="album">
+                <img src="https://via.placeholder.com/300" alt="Album Cover">
+                <h3>Album Title 1 <span class="edit-icon" onclick="editAlbum('Album Title 1')">✏️</span></h3>
+                <p>Description of Album 1. <span class="edit-icon" onclick="editAlbum('Description of Album 1')">✏️</span></p>
+            </div>
+            <div class="album">
+                <img src="https://via.placeholder.com/300" alt="Album Cover">
+                                <span class="edit-icon" onclick="editAlbum('Album Title 2')">✏️</span></h3>
+                <p>Description of Album 2. <span class="edit-icon" onclick="editAlbum('Description of Album 2')">✏️</span></p>
+            </div>
+            <div class="album">
+                <img src="https://via.placeholder.com/300" alt="Album Cover">
+                <h3>Album Title 3 <span class="edit-icon" onclick="editAlbum('Album Title 3')">✏️</span></h3>
+                <p>Description of Album 3. <span class="edit-icon" onclick="editAlbum('Description of Album 3')">✏️</span></p>
+            </div>
+            <div class="album">
+                <img src="https://via.placeholder.com/300" alt="Album Cover">
+                <h3>Album Title 4 <span class="edit-icon" onclick="editAlbum('Album Title 4')">✏️</span></h3>
+                <p>Description of Album 4. <span class="edit-icon" onclick="editAlbum('Description of Album 4')">✏️</span></p>
+            </div>
+            <div class="album">
+                <img src="https://via.placeholder.com/300" alt="Album Cover">
+                <h3>Album Title 5 <span class="edit-icon" onclick="editAlbum('Album Title 5')">✏️</span></h3>
+                <p>Description of Album 5. <span class="edit-icon" onclick="editAlbum('Description of Album 5')">✏️</span></p>
+            </div>
+            <div class="album">
+                <img src="https://via.placeholder.com/300" alt="Album Cover">
+                <h3>Album Title 6 <span class="edit-icon" onclick="editAlbum('Album Title 6')">✏️</span></h3>
+                <p>Description of Album 6. <span class="edit-icon" onclick="editAlbum('Description of Album 6')">✏️</span></p>
+            </div>
+            <div class="album">
+                <img src="https://via.placeholder.com/300" alt="Album Cover">
+                <h3>Album Title 7 <span class="edit-icon" onclick="editAlbum('Album Title 7')">✏️</span></h3>
+                <p>Description of Album 7. <span class="edit-icon" onclick="editAlbum('Description of Album 7')">✏️</span></p>
+            </div>
+            <div class="album">
+                <img src="https://via.placeholder.com/300" alt="Album Cover">
+                <h3>Album Title 8 <span class="edit-icon" onclick="editAlbum('Album Title 8')">✏️</span></h3>
+                <p>Description of Album 8. <span class="edit-icon" onclick="editAlbum('Description of Album 8')">✏️</span></p>
+            </div>
+            <div class="album">
+                <img src="https://via.placeholder.com/300" alt="Album Cover">
+                <h3>Album Title 9 <span class="edit-icon" onclick="editAlbum('Album Title 9')">✏️</span></h3>
+                <p>Description of Album 9. <span class="edit-icon" onclick="editAlbum('Description of Album 9')">✏️</span></p>
+            </div>
+            <div class="album">
+                <img src="https://via.placeholder.com/300" alt="Album Cover">
+                <h3>Album Title 10 <span class="edit-icon" onclick="editAlbum('Album Title 10')">✏️</span></h3>
+                <p>Description of Album 10. <span class="edit-icon" onclick="editAlbum('Description of Album 10')">✏️</span></p>
+            </div>
         </div>
     </main>
 
     <footer>
         <p>&copy; 2024 Galactic Memories. All rights reserved.</p>
     </footer>
+
+    <script>
+        function editAlbum(item) {
+            const newValue = prompt(`Edit the value for: ${item}`, item);
+            if (newValue !== null) {
+                                // Here you would typically update the album title or description in your data source
+                alert(`Updated to: ${newValue}`);
+                // Note: In a real application, you would also update the displayed text on the page.
+            }
+        }
+    </script>
 </body>
 </html>
