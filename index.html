@@ -117,8 +117,9 @@
             text-align: center;
             padding: 10px;
             position: relative;
-            bottom:            0;
+            bottom: 0;
             width: 100%;
+            margin-top:             0;
             margin-top: 20px;
         }
         /* Overlay for the admin prompt */
@@ -158,20 +159,19 @@
             display: none; /* Initially hidden */
             background-color: rgba(0, 0, 0, 0.8);
             color: white; /* Set text color to white */
-            padding: 20px;
+            padding: 10px 20px; /* Adjust padding */
             border-radius: 8px;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
+            position: fixed; /* Fixed position */
+            bottom: 20px; /* Distance from the bottom */
+            left: 20px; /* Distance from the left */
+            z-index: 1000; /* Ensure it overlays other content */
             text-align: center;
             cursor: pointer; /* Change cursor to pointer */
         }
     </style>
 </head>
 <body>
-        <header id="main-header">
+    <header id="main-header">
         <nav>
             <ul>
                 <li><a href="index.html" class="active">Home</a></li>
@@ -179,8 +179,6 @@
                 <li><a href="albums.html">Albums</a></li>
                 <li><a href="upload.html">Upload</a></li>
                 <li><a href="account.html">Account</a></li>
-                <li><a href="https://galacticmemories.github.io/Universe-Dreams" target="_blank">Universe Dreams</a></li>
-                <li><a href="https://galacticmemories.github.io/Space-memories-/index.html" target="_blank">Space Memories</a></li>
             </ul>
         </nav>
     </header>
@@ -207,7 +205,7 @@
         <!-- Overlay for the admin prompt -->
         <div class="overlay" id="adminOverlay">
             <div class="prompt-content">
-                                <h2>Admin Login</h2>
+                <h2>Admin Login</h2>
                 <form id="adminForm">
                     <div class="form-group">
                         <label for="usernameInput">Username</label>
@@ -215,14 +213,14 @@
                     </div>
                     <div class="form-group">
                         <label for="passwordInput">Password</label>
-                        <input type="password" id="passwordInput" placeholder="Enter password" required>
-                    </div>
+                        <input type="password" id="passwordInput" placeholder="Enter password" required
+                                                </div>
                     <button type="submit" aria-label="Submit Admin Login">Login</button>
                 </form>
             </div>
         </div>
 
-        <!-- Admin prompt at the bottom -->
+        <!-- Admin prompt at the bottom left corner -->
         <div class="admin-prompt" id="adminPromptBox">Made by Daddy</div>
     </main>
 
@@ -279,30 +277,6 @@
             } else {
                 adminPromptBox.style.display = 'none'; // Hide prompt
             }
-
-            // Update profile picture or initials
-            const profilePicture = localStorage.getItem('profilePicture');
-            const username = localStorage.getItem('currentUser '); // Ensure this matches your storage key
-            const initials = username ? username.charAt(0).toUpperCase() : '?'; // Get initials
-
-            const profileLink = document.querySelector('.profile-link img');
-            const initialsContainer = document.createElement('div');
-            initialsContainer.className = 'initials';
-            initialsContainer.textContent = initials;
-
-            if (profilePicture) {
-                profileLink.src = profilePicture; // Set profile picture
-                profileLink.style.display = 'block'; // Show profile picture
-                initialsContainer.style.display = 'none'; // Hide initials
-            } else {
-                profileLink.style.display = 'none'; // Hide profile picture
-                initialsContainer.style.display = 'flex'; // Show initials
-            }
-
-            // Append initials to the profile link container
-            const profileContainer = document.querySelector('.profile-picture-container');
-            profileContainer.innerHTML = ''; // Clear previous content
-            profileContainer.appendChild(initialsContainer); // Add initials
         });
     </script>
 </body>
