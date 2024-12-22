@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Albums - Galactic Memories</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: 'Roboto', sans-serif; /* Professional font */
-            background-image: url('https://th.bing.com/th/id/R.b1fb0f17e099a6875209bd6bf251136e?rik=HfvtcsJLvGQYgA&riu=http%3a%2f%2f1.bp.blogspot.com%2f-zeweT9-pNpU%2fUdA9ZJl-OLI%2fAAAAAAAAADM%2fd3Ai8O9Tt_w%2fs1572%2fGalaxies_wallpapers_327.jpg&ehk=Qai9pTebgS6OkNmC75wNfAsSIQr%2f0L%2bn9uhQNzCxeSU%3d&risl=&pid=ImgRaw&r=0'); /* New space-themed background */
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://www.pixelstalk.net/wp-content/uploads/images6/Universe-Wallpaper-Desktop.jpg');
             background-size: cover;
             background-position: center;
             color: white;
             overflow-x: hidden;
         }
         #main-header {
-            background-color: rgba(0, 0, 0, 0.8); /* Darker for better contrast */
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 10px;
             position: fixed;
             width: 100%;
@@ -42,6 +42,25 @@
             padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
             text-align: center; /* Center align text */
         }
+        h2 {
+            font-family: 'Cinzel', serif; /* Elegant font for headings */
+            font-size: 2.5em;
+            margin: 20px 0;
+        }
+        .album {
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            width: 300px;
+            vertical-align: top;
+        }
+        .album img {
+            width: 100%;
+            border-radius: 5px;
+        }
         footer {
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
@@ -51,67 +70,6 @@
             bottom: 0;
             width: 100%;
             margin-top: 20px;
-        }
-        .album {
-            border: 2px dashed rgba(255, 255, 255, 0.7);
-            padding: 20px;
-            margin: 20px;
-            min-height: 150px;
-            transition: background-color 0.3s;
-        }
-        .album:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
-            gap: 10px; /* Space between photos */
-            margin-top: 10px;
-        }
-        .photo-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px; /* Rounded corners */
-            cursor: grab;
-        }
-        .photo-item img {
-            width: 100%; /* Make images responsive */
-            height: auto; /* Maintain aspect ratio */
-            transition: transform 0.2s; /* Smooth zoom effect */
-        }
-        .photo-item:hover img {
-            transform: scale(1.05); /* Zoom effect on hover */
-        }
-        /* Modal styles for uploading photos */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border:             1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -130,146 +88,174 @@
 
     <main>
         <h2>Your Albums</h2>
-        <p>Drag and drop your photos into the albums below.</p>
-        
-        <div class="album" id="album1" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <h3>Album 1</h3>
-            <p>Drop photos here</p>
-            <div class="photo-grid" id="album1Photos"></div> <!-- Container for photos -->
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 1</h3>
+            <p>Description of Album 1.</p>
         </div>
-        
-        <div class="album" id="album2" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <h3>Album 2</h3>
-            <p>Drop photos here</p>
-            <div class="photo-grid" id="album2Photos"></div> <!-- Container for photos -->
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 2</h3>
+            <p>Description of Album 2.</p>
         </div>
-
-        <button id="uploadBtn">Upload Photo</button>
-        <button id="createAlbumBtn">Create New Album</button>
-
-        <!-- Upload Modal -->
-        <div id="uploadModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="document.getElementById('uploadModal').style.display='none'">&times;</span>
-                <h2>Upload Photo</h2>
-                <input type="file" id="fileInput" accept="image/*">
-                <input type="text" id="albumNameInput" placeholder="Enter album name (optional)">
-                <button onclick="uploadPhoto()">Submit</button>
-            </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 3</h3>
+            <p>Description of Album 3.</p>
         </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 4</h3>
+            <p>Description of Album 4.</p>
+        </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 5</h3>
+            <p>Description of Album 5.</p>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums - Galactic Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://www.pixelstalk.net/wp-content/uploads/images6/Universe-Wallpaper-Desktop.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            overflow-x: hidden;
+        }
+        #main-header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        main {
+            padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
+            text-align: center; /* Center align text */
+        }
+        h2 {
+            font-family: 'Cinzel', serif; /* Elegant font for headings */
+            font-size: 2.5em;
+            margin: 20px 0;
+        }
+        .album {
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            width: 300px;
+            vertical-align: top;
+        }
+        .album img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="albums.html" class="active">Albums</a></li>
+                <li><a href="upload.html">Upload</a></li>
+                <li><a href="account.html">Account</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <!-- Create Album Modal -->
-        <div id="createAlbumModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="document.getElementById('createAlbumModal').style.display='none'">&times;</span>
-                <h2>Create New Album</h2>
-                <input type="text" id="newAlbumNameInput" placeholder="Enter new album name">
-                <button onclick="createAlbum()">Create Album</button>
-            </div>
+    <main>
+        <h2>Your Albums</h2>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 1</h3>
+            <p>Description of Album 1.</p>
+        </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 2</h3>
+            <p>Description of Album 2.</p>
+        </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 3</h3>
+            <p>Description of Album 3.</p>
+        </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 4</h3>
+            <p>Description of Album 4.</p>
+        </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 5</h3>
+            <p>Description of Album 5.</p>    
+                </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 6</h3>
+            <p>Description of Album 6.</p>
+        </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 7</h3>
+            <p>Description of Album 7.</p>
+        </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 8</h3>
+            <p>Description of Album 8.</p>
+        </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 9</h3>
+            <p>Description of Album 9.</p>
+        </div>
+        <div class="album">
+            <img src="https://via.placeholder.com/300" alt="Album Cover">
+            <h3>Album Title 10</h3>
+            <p>Description of Album 10.</p>
         </div>
     </main>
 
     <footer>
         <p>&copy; 2024 Galactic Memories. All rights reserved.</p>
     </footer>
-
-    <script>
-        // Allow drop functionality
-        function allowDrop(event) {
-            event.preventDefault(); // Prevent default behavior to allow drop
-        }
-
-        // Drop functionality
-        function drop(event) {
-            event.preventDefault(); // Prevent default behavior
-            const data = event.dataTransfer.getData("text/plain"); // Get the image URL
-            const photoDiv = document.createElement("div");
-            photoDiv.className = "photo-item";
-            const img = document.createElement("img");
-            img.src = data; // Set the image source
-            photoDiv.appendChild(img); // Append the photo to the album
-            event.target.appendChild(photoDiv); // Append the photo to the album's photo grid
-        }
-
-        // Upload photo functionality
-        document.getElementById('uploadBtn').onclick = function() {
-            document.getElementById('uploadModal').style.display = 'block'; // Show the upload modal
-        };
-
-        function uploadPhoto() {
-            const fileInput = document.getElementById('fileInput');
-            const albumName = document.getElementById('albumNameInput').value;
-            const file = fileInput.files[0];
-
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const photoDiv = document.createElement("div");
-                    photoDiv.className = "photo-item";
-                                        const img = document.createElement("img");
-                    img.src = e.target.result; // Set the image source to the uploaded file
-                    photoDiv.appendChild(img); // Append the photo to the album
-
-                    // Append to the specified album or default to Album 1
-                    const albumPhotos = albumName ? document.getElementById(albumName + 'Photos') : document.getElementById('album1Photos');
-                    if (albumPhotos) {
-                        albumPhotos.appendChild(photoDiv); // Append the photo to the specified album's photo grid
-                    } else {
-                        alert('Album not found!'); // Alert if the album does not exist
-                    }
-                };
-                reader.readAsDataURL(file); // Read the file as a data URL
-                document.getElementById('uploadModal').style.display = 'none'; // Close the modal after upload
-            } else {
-                alert('Please select a file to upload.'); // Alert if no file is selected
-            }
-        }
-
-        // Create new album functionality
-        document.getElementById('createAlbumBtn').onclick = function() {
-            document.getElementById('createAlbumModal').style.display = 'block'; // Show the create album modal
-        };
-
-        function createAlbum() {
-            const newAlbumName = document.getElementById('newAlbumNameInput').value;
-            if (newAlbumName) {
-                const albumDiv = document.createElement("div");
-                albumDiv.className = "album";
-                albumDiv.id = newAlbumName + 'Photos'; // Set the ID for the album
-                albumDiv.ondrop = drop;
-                albumDiv.ondragover = allowDrop;
-
-                const albumTitle = document.createElement("h3");
-                albumTitle.textContent = newAlbumName;
-                const albumMessage = document.createElement("p");
-                albumMessage.textContent = "Drop photos here";
-                const photoGrid = document.createElement("div");
-                photoGrid.className = "photo-grid";
-                photoGrid.id = newAlbumName + 'Photos'; // Set the ID for the photo grid
-
-                albumDiv.appendChild(albumTitle);
-                albumDiv.appendChild(albumMessage);
-                albumDiv.appendChild(photoGrid);
-                document.querySelector('main').appendChild(albumDiv); // Add the new album to the main section
-
-                document.getElementById('createAlbumModal').style.display = 'none'; // Close the modal after creating the album
-                document.getElementById('newAlbumNameInput').value = ''; // Clear the input field
-            } else {
-                alert('Please enter a valid album name.'); // Alert if no name is provided
-            }
-        }
-
-        // Close the modal when clicking outside of it
-        window.onclick = function(event) {
-            const uploadModal = document.getElementById('uploadModal');
-            const createAlbumModal = document.getElementById('createAlbumModal');
-            if (event.target == uploadModal) {
-                uploadModal.style.display = "none";
-            }
-            if (event.target == createAlbumModal) {
-                createAlbumModal.style.display = "none";
-            }
-        };
-    </script>
 </body>
-</html>
+</html>    
