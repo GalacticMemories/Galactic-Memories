@@ -1,1 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Photos - Galactic Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://images.hdqwalls.com/download/nebula-planet-space-2n-3840x2400.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            overflow-x: hidden;
+        }
+        #main-header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        main {
+            padding: 100px 20px 20px;
+            text-align: center;
+        }
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5em;
+            margin: 20px 0;
+        }
+        .upload-form {
+            margin: 20px auto;
+            max-width: 400px;
+            text-align: left;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        .upload-form input[type="file"] {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .upload-form button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .upload-form button:hover {
+            background-color: #218838;
+        }
+        #uploadStatus {
+            margin-top: 10px;
+            color: yellow;
+        }
+        #progressBar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            overflow: hidden;
+            display: none;
+        }
+        #progressBar div {
+            height: 20px;
+            background-color: #4caf50;
+            width: 0;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="albums.html">Albums</a></li>
+                <li><a href="upload.html" class="active">Upload</a></li>
+                <li><a href="account.html">Account</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main>
+        <h2>Upload Photos to Google Photos</h2>
+        <div class="upload-form">
+            <input type="file" id="fileInput" accept="image/*" multiple />
+                        <button id="uploadButton">Upload</button>
+            <div id="progressBar"><div></div></div>
+            <p id="uploadStatus"></p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Galactic Memories. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const uploadButton = document.getElementById('uploadButton');
+        const fileInput = document.getElementById('fileInput');
+        const uploadStatus = document.getElementById('uploadStatus');
+        const progressBar = document.getElementById('progressBar').firstElementChild;
+
+        // Replace with your actual OAuth 2.0 access token
+        const accessToken = 'YOUR_OAUTH_ACCESS_TOKEN';
+
+        uploadButton.addEventListener('click', async () => {
+            const files = fileInput.files;
+            if (files.length === 0) {
+                uploadStatus.textContent = 'Please select at least one file to upload.';
+                return;
+            }
+
+            // Show loading status
+            uploadStatus.textContent = 'Uploading...';
+            progressBar.style.display = 'block';
+            progressBar.style.width = '0%';
+
+            for (const file of files) {
+                // File validation
+                const maxFileSize = 200 * 1024 * 1024; // 200 MB
+                const acceptedFileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/tiff', 'image/bmp', 'image/heic'];
+
+                if (!acceptedFileTypes.includes(file.type)) {
+                    uploadStatus.textContent = `Unsupported file type for ${file.name}. Please upload an image.`;
+                    continue;
+                }
+
+                if (file.size > maxFileSize) {
+                    uploadStatus.textContent = `File size exceeds the maximum limit of 200 MB for ${file.name}.`;
+                    continue;
+                }
+
+                // Step 1: Upload bytes to Google Photos
+                try {
+                    const uploadResponse = await fetch('https://photoslibrary.googleapis.com/v1/uploads', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                            'Content-Type': 'application/octet-stream',
+                            'X-Goog-Upload-Content-Type': file.type,
+                            'X-Goog-Upload-Protocol': 'raw'
+                        },
+                        body: file
+                    });
+
+                    if (!uploadResponse.ok) {
+                        throw new Error('Upload failed: ' + uploadResponse.statusText);
+                    }
+
+                    const uploadToken = await uploadResponse.text();
+                    uploadStatus.textContent = `Upload successful for ${file.name}!`;
+
+                    // Step 2: Create media item in the user's library
+                    const mediaItemResponse = await fetch('https://photoslibrary.googleapis.com/v1/mediaItems:batchCreate', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            newMediaItems: [{
+                                description: file.name,
+                                simpleMediaItem: {
+                                    uploadToken: uploadToken
+                                }
+                            }]
+                        })
+                    });
+
+                    if (!mediaItemResponse.ok) {
+                        throw new Error('Media item creation failed: ' + mediaItemResponse.statusText);
+                    }
+
+                    const mediaItemResult = await mediaItemResponse.json();
+                    console.log('Media item created:', mediaItemResult);
+
+                    // Update progress bar
+                    const progressPercentage = ((Array.from(files).indexOf(file) + 1) / files.length) * 100;
+                    progressBar.style.width = `${progressPercentage}%`;
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    uploadStatus.textContent = 'Error: ' + error.message;
+                }
+            }
+
+            // Hide progress bar after all uploads
+            setTimeout(() => {
+                progressBar.style.display = 'none';
+                uploadStatus.textContent = 'All uploads completed!';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
