@@ -9,7 +9,7 @@
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            background-image: url('https://images.hdqwalls.com/download/nebula-planet-space-2n-3840x2400.jpg');
+            background-image: url('https://i.pinimg.com/originals/e6/dd/df/e6dddfbc2e09fa163ed5e0b623af921f.jpg');
             background-size: cover;
             background-position: center;
             color: white;
@@ -81,6 +81,11 @@
             width: 100%;
             margin-top: 20px;
         }
+        .loading {
+            display: none;
+            color: yellow;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -116,11 +121,11 @@
             <button class="submit-button" id="signupButton">Create Account</button>
         </div>
 
-        <div id="signinForm" style="margin-top: 40px;">
+                <div id="signinForm" style="margin-top: 40px;">
             <h3>Sign In</h3>
             <div class="form-group">
                 <label for="signinUsername">Username</label>
-                                <input type="text" id="signinUsername" placeholder="Enter your username" required>
+                <input type="text" id="signinUsername" placeholder="Enter your username" required>
             </div>
             <div class="form-group">
                 <label for="signinPassword">Password</label>
@@ -128,6 +133,21 @@
             </div>
             <button class="submit-button" id="signinButton">Sign In</button>
         </div>
+
+        <div id="passwordResetForm" style="margin-top: 40px; display: none;">
+            <h3>Reset Password</h3>
+            <div class="form-group">
+                <label for="resetEmail">Email</label>
+                <input type="email" id="resetEmail" placeholder="Enter your email" required>
+            </div>
+            <button class="submit-button" id="resetButton">Reset Password</button>
+            <p class="loading" id="resetLoading">Sending reset link...</p>
+            <p class="loading" id="resetStatus"></p>
+        </div>
+
+        <p style="margin-top: 20px;">
+            <a href="#" id="showResetLink">Forgot Password?</a>
+        </p>
     </main>
 
     <footer>
@@ -178,6 +198,29 @@
                 window.location.href = 'profile.html'; // Redirect to profile page
             } else {
                 alert('Invalid username or password. Please try again.');
+            }
+        });
+
+        // Show password reset form
+        document.getElementById('showResetLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('passwordResetForm').style.display = 'block';
+        });
+
+        // Function to handle password reset
+        document.getElementById('resetButton').addEventListener('click', function() {
+            const email = document.getElementById('resetEmail').value;
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(user => user.email === email);
+
+            if (user) {
+                document.getElementById('resetLoading').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('resetLoading').style.display = 'none';
+                    document.getElementById('resetStatus').textContent = 'A reset link has been sent to your email.';
+                }, 2000); // Simulate sending email
+            } else {
+                                alert('No account found with that email address.');
             }
         });
     </script>
