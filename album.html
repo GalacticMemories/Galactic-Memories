@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums - Galactic Memories</title>
+    <title>Photos - Galactic Memories</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif; /* Professional font */
-            background-image: url('https://ugc.futurelearn.com/uploads/images/7a/1a/7a1aec47-8310-4f1a-887c-3afa46c72495.jpg');
+            background-image: url('https://cdn.wallpapersafari.com/8/23/mp9YUX.jpg'); /* New background image */
             background-size: cover;
             background-position: center;
             color: white;
@@ -65,6 +65,26 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .album {
+            border: 2px dashed rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            margin: 20px;
+            min-height: 150px;
+            transition: background-color 0.3s;
+        }
+        .album:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .photo {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            border: 1px solid white;
+            display: inline-block;
+            background-size: cover;
+            background-position: center;
+            cursor: grab;
+        }
         footer {
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
@@ -82,8 +102,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="photos.html">Photos</a></li>
-                <li><a href="albums.html" class="active">Albums</a></li> <!-- Active link for Albums -->
+                <li><a href="photos.html" class="active">Photos</a></li>
+                <li><a href="albums.html">Albums</a></li>
                 <li><a href="upload.html">Upload</a></li>
                 <li><a href="account.html">Account</a></li>
                 <li><a href="profile.html">Profile</a></li>
@@ -92,19 +112,50 @@
     </header>
 
     <main>
-        <h2>Your Albums</h2>
-        <p>Welcome to your albums! Here you can view and manage all your photo albums. Create new albums, organize your photos, and share your memories with friends and family.</p>
+        <h2>Your Photos</h2>
+        <p>Drag and drop your photos into the albums below.</p>
 
-        <h2>Featured Albums</h2>
-        <p>Check out some of the featured albums below:</p>
-        <ul>
-            <li>Summer Vacation 2023</li>
-            <li>Family Reunion</li>
-            <li>Core Memories</li> <!-- Updated album name -->
-            <li>Birthday Celebrations</li>
-        </ul>
+        <div class="album" id="album1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <h3>Album 1</h3>
+            <p>Drop photos here</p>
+        </div>
+        <div class="album" id="album2" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3>Album 2</h3>
+            <p>Drop photos here</p>
+        </div>
+
+        <h2>Available Photos</h2>
+        <div id="photoContainer">
+            <div class="photo" draggable="true" ondragstart="drag(event)" style="background-image: url('https://example.com/photo1.jpg');"></div>
+            <div class="photo" draggable="true" ondragstart="drag(event)" style="background-image: url('https://example.com/photo2.jpg');"></div>
+            <div class="photo" draggable="true" ondragstart="drag(event)" style="background-image: url('https://example.com/photo3.jpg');"></div>
+            <div class="photo" draggable="true" ondragstart="drag(event)" style="background-image: url('https://example.com/photo4.jpg');"></div>
+            <!-- Add more photos as needed -->
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2024 Galactic Memories. All rights reserved.</p> <!-- Updated year -->
-        <p>Licensed under the Creative Commons Attribution-
+        <p>Licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.</p> <!-- Licensing information -->
+    </footer>
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault(); // Prevent default behavior to allow drop
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text/plain", event.target.style.backgroundImage); // Store the image URL
+        }
+
+        function drop(event) {
+            event.preventDefault(); // Prevent default behavior
+            const data = event.dataTransfer.getData("text/plain"); // Get the image URL
+            const photoDiv = document.createElement("div");
+            photoDiv.className = "photo";
+            photoDiv.style.backgroundImage = data; // Set the background image
+            event.target.appendChild(photoDiv); // Append the photo to the album
+        }
+    </script>
+</body>
+</html>
