@@ -47,13 +47,29 @@
             font-size: 2em;
             margin: 20px 0;
         }
-        p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            margin: 10px 0;
-            max-width: 800px; /* Limit width for better readability */
-            margin-left: auto;
-            margin-right: auto;
+        .form-group {
+            margin: 20px 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 300px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .submit-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
         }
         footer {
             background-color: rgba(0, 0, 0, 0.8);
@@ -64,34 +80,6 @@
             bottom: 0;
             width: 100%;
             margin-top: 20px;
-        }
-        .photo-list {
-            margin: 20px auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 80%;
-            max-width: 600px;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        .photo-item {
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-        .photo-item:last-child {
-            border-bottom: none;
-        }
-        .view-button {
-            display: inline-block;
-            margin-left: 10px;
-            padding: 5px 10px;
-            background-color: #007BFF;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .view-button:hover {
-            background-color: #0056b3;
         }
     </style>
 </head>
@@ -109,31 +97,77 @@
     </header>
 
     <main>
-        <h2>Your Account</h2>
-        <p>Welcome to your account page! Here you can manage your uploaded photos and view your albums.</p>
+        <h2>Sign Up / Login</h2>
+        <div id="loginForm">
+            <h3>Login</h3>
+            <div class="form-group">
+                <label for="loginUsername">Username</label>
+                <input type="text" id="loginUsername" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+            </div>
+            <button class="submit-button" id="loginButton">Login</button>
+        </div>
 
-        <div class="photo-list">
-            <h3>Your Uploaded Photos</h3>
-            <div class="photo-item">
-                Photo 1: <a href="link_to_photo_1.jpg" target="_blank" class="view-button">View</a>
+        <div id="signupForm">
+            <h3>Sign Up</h3>
+            <div class="form-group">
+                <label for="signupUsername">Username</label>
+                               <input type="text" id="signupUsername" placeholder="Choose a username" required>
             </div>
-            <div class="photo-item">
-                Photo 2: <a href="link_to_photo_2.jpg" target="_blank" class="view-button">View</a>
-                        <div class="photo-item">
-                Photo 3: <a href="link_to_photo_3.jpg" target="_blank" class="view-button">View</a>
+            <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" placeholder="Choose a password" required>
             </div>
-            <div class="photo-item">
-                Photo 4: <a href="link_to_photo_4.jpg" target="_blank" class="view-button">View</a>
-            </div>
-            <div class="photo-item">
-                Photo 5: <a href="link_to_photo_5.jpg" target="_blank" class="view-button">View</a>
-            </div>
-            <!-- Add more photos as needed -->
+            <button class="submit-button" id="signupButton">Sign Up</button>
         </div>
     </main>
 
     <footer>
         <p>&copy; 2023 Galactic Memories. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Function to handle user sign-up
+        document.getElementById('signupButton').addEventListener('click', function() {
+            const username = document.getElementById('signupUsername').value;
+            const password = document.getElementById('signupPassword').value;
+
+            // Check if the username already exists
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            const userExists = users.some(user => user.username === username);
+
+            if (userExists) {
+                alert('Username already exists. Please choose a different username.');
+            } else {
+                // Add new user to the users array
+                users.push({ username, password });
+                localStorage.setItem('users', JSON.stringify(users));
+                alert('Sign up successful! You can now log in.');
+                document.getElementById('signupUsername').value = '';
+                document.getElementById('signupPassword').value = '';
+            }
+        });
+
+        // Function to handle user login
+        document.getElementById('loginButton').addEventListener('click', function() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Retrieve users from local storage
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                alert('Login successful!');
+                // Redirect to the admin page or another page
+                window.location.href = 'admin.html'; // Change this to the desired page
+            } else {
+                alert('Invalid username or password. Please try again.');
+            }
+        });
+    </script>
 </body>
 </html>
