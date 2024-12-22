@@ -96,16 +96,16 @@
                 <li><a href="photos.html">Photos</a></li>
                 <li><a href="albums.html">Albums</a></li>
                 <li><a href="upload.html">Upload</a></li>
-                <li><a href="account.html" class="active">Account</a></li>
+                <li id="account-link"><a href="account.html" class="active">Account</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h2>Sign Up / Sign In</h2>
+        <h2>Sign Up</h2>
         
         <div id="signupForm">
-            <h3>Sign Up</h3>
+            <h3>Create Your Account</h3>
             <div class="form-group">
                 <label for="signupUsername">Username</label>
                 <input type="text" id="signupUsername" placeholder="Enter your username" required>
@@ -119,10 +119,12 @@
                 <input type="password" id="signupPassword" placeholder="Enter your password" required>
             </div>
             <button class="submit-button" id="signupButton">Create Account</button>
+                        <p class="loading" id="signupLoading">Creating account...</p>
         </div>
 
-                <div id="signinForm" style="margin-top: 40px;">
-            <h3>Sign In</h3>
+        <h2 style="margin-top: 40px;">Sign In</h2>
+        <div id="signinForm">
+            <h3>Welcome Back!</h3>
             <div class="form-group">
                 <label for="signinUsername">Username</label>
                 <input type="text" id="signinUsername" placeholder="Enter your username" required>
@@ -132,7 +134,12 @@
                 <input type="password" id="signinPassword" placeholder="Enter your password" required>
             </div>
             <button class="submit-button" id="signinButton">Sign In</button>
+            <p class="loading" id="signinLoading">Signing in...</p>
         </div>
+
+        <p style="margin-top: 20px;">
+            <a href="#" id="showResetLink" style="color: lightblue;">Forgot Password?</a>
+        </p>
 
         <div id="passwordResetForm" style="margin-top: 40px; display: none;">
             <h3>Reset Password</h3>
@@ -144,10 +151,6 @@
             <p class="loading" id="resetLoading">Sending reset link...</p>
             <p class="loading" id="resetStatus"></p>
         </div>
-
-        <p style="margin-top: 20px;">
-            <a href="#" id="showResetLink">Forgot Password?</a>
-        </p>
     </main>
 
     <footer>
@@ -161,6 +164,9 @@
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
 
+            // Show loading message
+            document.getElementById('signupLoading').style.display = 'block';
+
             // Retrieve users from local storage
             let users = JSON.parse(localStorage.getItem('users')) || [];
 
@@ -168,6 +174,7 @@
             const existingUser  = users.find(user => user.username === username);
             if (existingUser ) {
                 alert('Username already exists. Please choose a different username.');
+                document.getElementById('signupLoading').style.display = 'none';
                 return;
             }
 
@@ -188,6 +195,9 @@
             const username = document.getElementById('signinUsername').value;
             const password = document.getElementById('signinPassword').value;
 
+            // Show loading message
+            document.getElementById('signinLoading').style.display = 'block';
+
             // Retrieve users from local storage
             let users = JSON.parse(localStorage.getItem('users')) || [];
             const user = users.find(user => user.username === username && user.password === password);
@@ -199,6 +209,8 @@
             } else {
                 alert('Invalid username or password. Please try again.');
             }
+
+            document.getElementById('signinLoading').style.display = 'none';
         });
 
         // Show password reset form
@@ -209,7 +221,7 @@
 
         // Function to handle password reset
         document.getElementById('resetButton').addEventListener('click', function() {
-            const email = document.getElementById('resetEmail').value;
+                        const email = document.getElementById('resetEmail').value;
             const users = JSON.parse(localStorage.getItem('users')) || [];
             const user = users.find(user => user.email === email);
 
@@ -220,7 +232,7 @@
                     document.getElementById('resetStatus').textContent = 'A reset link has been sent to your email.';
                 }, 2000); // Simulate sending email
             } else {
-                                alert('No account found with that email address.');
+                alert('No account found with that email address.');
             }
         });
     </script>
