@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photos - Galactic Memories</title>
+    <title>Albums - Galactic Memories</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif; /* Professional font */
-            background-image: url('https://cdn.wallpapersafari.com/8/23/mp9YUX.jpg'); /* New background image */
+            background-image: url('https://cdn.wallpapersafari.com/8/23/mp9YUX.jpg'); /* Space-themed background */
             background-size: cover;
             background-position: center;
             color: white;
@@ -22,7 +22,6 @@
             width: 100%;
             top: 0;
             left: 0;
-            transition: top 0.3s, background-color 0.3s; /* Smooth transitions */
             z-index: 1000;
         }
         nav ul {
@@ -38,52 +37,10 @@
             color: white;
             text-decoration: none;
             font-size: 1.2em;
-            transition: color 0.3s; /* Smooth color transition */
-        }
-        nav ul li a:hover {
-            color: #FFD700; /* Gold color on hover */
         }
         main {
             padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
             text-align: center; /* Center align text */
-            animation: fadeIn 1s; /* Fade-in animation for main content */
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        h2 {
-            font-family: 'Cinzel', serif; /* Elegant font for headings */
-            font-size: 2em;
-            margin: 20px 0;
-        }
-        p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            margin: 10px 0;
-            max-width: 800px; /* Limit width for better readability */
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .album {
-            border: 2px dashed rgba(255, 255, 255, 0.7);
-            padding: 20px;
-            margin: 20px;
-            min-height: 150px;
-            transition: background-color 0.3s;
-        }
-        .album:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        .photo {
-            width: 100px;
-            height: 100px;
-            margin: 10px;
-            border: 1px solid white;
-            display: inline-block;
-            background-size: cover;
-            background-position: center;
-            cursor: grab;
         }
         footer {
             background-color: rgba(0, 0, 0, 0.8);
@@ -95,6 +52,67 @@
             width: 100%;
             margin-top: 20px;
         }
+        .album {
+            border: 2px dashed rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            margin: 20px;
+            min-height: 150px;
+            transition: background-color 0.3s;
+        }
+        .album:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+            gap: 10px; /* Space between photos */
+            margin-top: 10px;
+        }
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px; /* Rounded corners */
+            cursor: grab;
+        }
+        .photo-item img {
+            width: 100%; /* Make images responsive */
+            height: auto; /* Maintain aspect ratio */
+            transition: transform 0.2s; /* Smooth zoom effect */
+        }
+        .photo-item:hover img {
+            transform: scale(1.05); /* Zoom effect on hover */
+        }
+        /* Modal styles for uploading photos */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -102,59 +120,100 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="photos.html" class="active">Photos</a></li>
-                <li><a href="albums.html">Albums</a></li>
+                                <li><a href="photos.html">Photos</a></li>
+                <li><a href="albums.html" class="active">Albums</a></li>
                 <li><a href="upload.html">Upload</a></li>
                 <li><a href="account.html">Account</a></li>
-                <li><a href="profile.html">Profile</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h2>Your Photos</h2>
+        <h2>Your Albums</h2>
         <p>Drag and drop your photos into the albums below.</p>
-
+        
         <div class="album" id="album1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                        <h3>Album 1</h3>
+            <h3>Album 1</h3>
             <p>Drop photos here</p>
+            <div class="photo-grid" id="album1Photos"></div> <!-- Container for photos -->
         </div>
+        
         <div class="album" id="album2" ondrop="drop(event)" ondragover="allowDrop(event)">
             <h3>Album 2</h3>
             <p>Drop photos here</p>
+            <div class="photo-grid" id="album2Photos"></div> <!-- Container for photos -->
         </div>
 
-        <h2>Available Photos</h2>
-        <div id="photoContainer">
-            <div class="photo" draggable="true" ondragstart="drag(event)" style="background-image: url('https://example.com/photo1.jpg');"></div>
-            <div class="photo" draggable="true" ondragstart="drag(event)" style="background-image: url('https://example.com/photo2.jpg');"></div>
-            <div class="photo" draggable="true" ondragstart="drag(event)" style="background-image: url('https://example.com/photo3.jpg');"></div>
-            <div class="photo" draggable="true" ondragstart="drag(event)" style="background-image: url('https://example.com/photo4.jpg');"></div>
-            <!-- Add more photos as needed -->
+        <button id="uploadBtn">Upload Photo</button>
+
+        <!-- Upload Modal -->
+        <div id="uploadModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="document.getElementById('uploadModal').style.display='none'">&times;</span>
+                <h2>Upload Photo</h2>
+                <input type="file" id="fileInput" accept="image/*">
+                <button onclick="uploadPhoto()">Submit</button>
+            </div>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 Galactic Memories. All rights reserved.</p> <!-- Updated year -->
-        <p>Licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.</p> <!-- Licensing information -->
+        <p>&copy; 2024 Galactic Memories. All rights reserved.</p>
     </footer>
 
     <script>
+        // Allow drop functionality
         function allowDrop(event) {
             event.preventDefault(); // Prevent default behavior to allow drop
         }
 
+        // Drag functionality
         function drag(event) {
-            event.dataTransfer.setData("text/plain", event.target.style.backgroundImage); // Store the image URL
+            event.dataTransfer.setData("text/plain", event.target.src); // Store the image URL
         }
 
+        // Drop functionality
         function drop(event) {
             event.preventDefault(); // Prevent default behavior
             const data = event.dataTransfer.getData("text/plain"); // Get the image URL
             const photoDiv = document.createElement("div");
-            photoDiv.className = "photo";
-            photoDiv.style.backgroundImage = data; // Set the background image
-            event.target.appendChild(photoDiv); // Append the photo to the album
+            photoDiv.className = "photo-item";
+            const img = document.createElement("img");
+            img.src = data; // Set the image source
+            photoDiv.appendChild(img); // Append the photo to the album
+            event.target.appendChild(photoDiv); // Append the photo to the album's photo grid
+        }
+
+        // Upload photo functionality
+        document.getElementById('uploadBtn').onclick = function() {
+            document.getElementById('uploadModal').style.display = 'block'; // Show the upload modal
+        };
+
+        function uploadPhoto() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const photoDiv = document.createElement("div");
+                    photoDiv.className = "photo-item";
+                    const img = document.createElement("img");
+                    img.src = e.target.result; // Set the image source to the uploaded file
+                    photoDiv.appendChild(img); // Append the photo to the album
+                    document.getElementById('album1Photos').appendChild(photoDiv); // Add to Album 1 for demonstration
+                };
+                reader.readAsDataURL(file); // Read the file as a data URL
+                document.getElementById('uploadModal').style.display = 'none'; // Hide the modal after upload
+                fileInput.value = ''; // Clear the file input
+            }
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('uploadModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     </script>
 </body>
