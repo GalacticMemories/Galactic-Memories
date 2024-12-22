@@ -39,6 +39,29 @@
             text-decoration: none;
             font-size: 1.2em;
         }
+        main {
+            padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
+            text-align: center; /* Center align text */
+        }
+        h2 {
+            font-family: 'Cinzel', serif; /* Elegant font for headings */
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 10px 0;
+            max-width: 800px; /* Limit width for better readability */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        ul {
+            list-style-type: disc;
+            margin: 20px auto;
+            padding-left: 40px; /* Indent list items */
+            max-width: 800px; /* Limit width for better readability */
+        }
         footer {
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
@@ -48,10 +71,6 @@
             bottom: 0;
             width: 100%;
             margin-top: 20px;
-        }
-        main {
-            padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
-            text-align: center; /* Center align text */
         }
         /* Overlay for the admin prompt */
         .overlay {
@@ -106,13 +125,13 @@
     <header id="main-header">
         <nav>
             <ul>
-                <li><a href="index.html" class="active">Home</a></li>
+                                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="photos.html">Photos</a></li>
                 <li><a href="albums.html">Albums</a></li>
                 <li><a href="upload.html">Upload</a></li>
                 <li><a href="account.html">Account</a></li>
                 <li><a href="https://galacticmemories.github.io/Universe-Dreams" target="_blank">Universe Dreams</a></li>
-                                <li><a href="https://galacticmemories.github.io/Space-memories-/index.html" target="_blank">Space Memories</a></li>
+                <li><a href="https://galacticmemories.github.io/Space-memories-/index.html" target="_blank">Space Memories</a></li>
             </ul>
         </nav>
     </header>
@@ -187,7 +206,7 @@
                 alert('Invalid username or password.'); // Show error message
             }
 
-            // Clear the form
+                       // Clear the form
             adminForm.reset();
             adminOverlay.style.display = 'none'; // Hide overlay after submission
         });
@@ -201,4 +220,3 @@
     </script>
 </body>
 </html>
-``
