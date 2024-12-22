@@ -9,7 +9,7 @@
     <style>
         body {
             margin: 0;
-            font-family: 'Permanent Marker', cursive; /* Graffiti-style font */
+            font-family: 'Roboto', sans-serif; /* Professional font for description */
             background-image: url('https://images.hdqwalls.com/download/nebula-planet-space-2n-3840x2400.jpg');
             background-size: cover;
             background-position: center;
@@ -67,9 +67,6 @@
             border: none;
             border-radius: 5px;
         }
-        .gallery {
-            margin-top: 20px;
-        }
         footer {
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
@@ -84,6 +81,26 @@
             padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
             text-align: center; /* Center align text */
         }
+        /* Overlay for the admin prompt */
+        .overlay {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            z-index: 999; /* Below the prompt but above the content */
+            justify-content: center;
+            align-items: center;
+        }
+        .prompt-content {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -96,15 +113,16 @@
                 <li><a href="upload.html">Upload</a></li>
                 <li><a href="account.html">Account</a></li>
                 <li><a href="admin.html">Admin</a></li>
-                <li><a href="https://galacticmemories.github.io/Universe-Dreams" target="_blank">Universe Dreams</a></li>
+                <li><a href="https://galacticmemories.github.io/Universe-Dreams" target="_blank">Universe Dreams</                </li>
                 <li><a href="https://galacticmemories.github.io/Space-memories-/index.html" target="_blank">Space Memories</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <h2>Welcome to Galactic Memories</h2>
-        <p>Galactic Memories is an innovative web application that serves as a digital sanctuary for users to create, manage, and share their cherished photo albums. Designed with a captivating space theme, the website immerses users in a cosmic experience, featuring stunning visuals of nebulae and celestial bodies that evoke the wonder of the universe.
-                    <h2>Key Features</h2>
+        <p>Galactic Memories is an innovative web application designed to serve as a digital sanctuary for users to create, manage, and share their cherished photo albums. With a captivating space theme, the website immerses users in a cosmic experience, featuring stunning visuals of nebulae and celestial bodies that evoke the wonder of the universe.</p>
+
+        <h2>Key Features</h2>
         <ul>
             <li>User account management: Create and manage your personal account to keep your memories safe.</li>
             <li>Seamless photo uploading: Easily upload your favorite photos and videos to your albums.</li>
@@ -119,23 +137,25 @@
         <h2>Conclusion</h2>
         <p>Galactic Memories is more than just a photo-sharing platform; it is a cosmic journey through the memories of life. With its stunning space-themed design, user-friendly features, and commitment to community engagement, it provides a unique and memorable experience for all users.</p>
 
-        <!-- Admin Prompt Box -->
-        <div class="admin-prompt" id="adminPromptBox" onclick="toggleAdminPrompt()">Made by Daddy</div>
-
-        <!-- Admin Login Section (Initially Hidden) -->
-        <div class="admin-section" id="adminSection" style="display: none;">
-            <h2>Admin Login</h2>
-            <form id="adminForm">
-                <div class="form-group">
-                    <label for="usernameInput">Username</label>
-                    <input type="text" id="usernameInput" placeholder="Enter username" required>
+        <!-- Overlay for the admin prompt -->
+        <div class="overlay" id="adminOverlay">
+            <div class="prompt-content">
+                <div class="admin-prompt" id="adminPromptBox" onclick="toggleAdminPrompt()">Made by Daddy</div>
+                <div class="admin-section" id="adminSection" style="display: none;">
+                    <h2>Admin Login</h2>
+                    <form id="adminForm">
+                        <div class="form-group">
+                            <label for="usernameInput">Username</label>
+                            <input type="text" id="usernameInput" placeholder="Enter username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordInput">Password</label>
+                            <input type="password" id="passwordInput" placeholder="Enter password" required>
+                        </div>
+                        <button type="submit" aria-label="Submit Admin Login">Login</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="passwordInput">Password</label>
-                    <input type="password" id="passwordInput" placeholder="Enter password" required>
-                </div>
-                <button type="submit" aria-label="Submit Admin Login">Login</button>
-            </form>
+            </div>
         </div>
     </main>
     <footer>
@@ -148,6 +168,7 @@
         const header = document.getElementById('main-header');
         const adminPromptBox = document.getElementById('adminPromptBox');
         const adminSection = document.getElementById('adminSection');
+        const adminOverlay = document.getElementById('adminOverlay');
 
         window.addEventListener('scroll', function() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -172,8 +193,10 @@
         function toggleAdminPrompt() {
             if (adminSection.style.display === 'none') {
                 adminSection.style.display = 'block'; // Show admin section
+                adminOverlay.style.display = 'flex'; // Show overlay
             } else {
-                adminSection.style.display = 'none'; // Hide admin section
+                adminSection.style.display = 'none'; // Hide                 adminSection.style.display = 'none'; // Hide admin section
+                adminOverlay.style.display = 'none'; // Hide overlay
             }
         }
 
@@ -186,8 +209,8 @@
 
             // Check credentials
             if (username === 'admin' && password === 'admin1234567890') {
-                alert('Login successful!'); // Placeholder for successful login action
-                // Here you can redirect to the admin dashboard or perform other actions
+                // Redirect to the admin page on successful login
+                window.location.href = 'https://galacticmemories.github.io/Galactic-Memories/admin.html';
             } else {
                 alert('Invalid username or password.'); // Show error message
             }
@@ -195,10 +218,8 @@
             // Clear the form
             document.getElementById('adminForm').reset();
             adminSection.style.display = 'none'; // Hide the admin section after submission
-            adminSection.style.display = 'none';
+            adminOverlay.style.display = 'none'; // Hide overlay
         });
     </script>
 </body>
 </html>
-
-       
