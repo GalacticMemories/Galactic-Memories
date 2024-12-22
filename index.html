@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Galactic Memories</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../styles/styles.css">
     <style>
         body {
             margin: 0;
-            font-family: 'Roboto', sans-serif; /* Professional font for description */
+            font-family: 'Roboto', sans-serif; /* Professional font */
             background-image: url('https://images.hdqwalls.com/download/nebula-planet-space-2n-3840x2400.jpg');
             background-size: cover;
             background-position: center;
@@ -39,33 +38,6 @@
             color: white;
             text-decoration: none;
             font-size: 1.2em;
-        }
-        .admin-prompt {
-            display: none; /* Initially hidden */
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white; /* Set text color to white */
-            padding: 20px;
-            border-radius: 8px;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            text-align: center;
-            cursor: pointer; /* Change cursor to pointer */
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
         }
         footer {
             background-color: rgba(0, 0, 0, 0.8);
@@ -101,6 +73,33 @@
             text-align: center;
             color: white;
         }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .admin-prompt {
+            display: block; /* Always show the prompt */
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white; /* Set text color to white */
+            padding: 20px;
+            border-radius: 8px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            text-align: center;
+            cursor: pointer; /* Change cursor to pointer */
+        }
     </style>
 </head>
 <body>
@@ -112,12 +111,12 @@
                 <li><a href="albums.html">Albums</a></li>
                 <li><a href="upload.html">Upload</a></li>
                 <li><a href="account.html">Account</a></li>
-                <li><a href="admin.html">Admin</a></li>
-                <li><a href="https://galacticmemories.github.io/Universe-Dreams" target="_blank">Universe Dreams</                </li>
-                <li><a href="https://galacticmemories.github.io/Space-memories-/index.html" target="_blank">Space Memories</a></li>
+                <li><a href="https://galacticmemories.github.io/Universe-Dreams" target="_blank">Universe Dreams</a></li>
+                                <li><a href="https://galacticmemories.github.io/Space-memories-/index.html" target="_blank">Space Memories</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
         <h2>Welcome to Galactic Memories</h2>
         <p>Galactic Memories is an innovative web application designed to serve as a digital sanctuary for users to create, manage, and share their cherished photo albums. With a captivating space theme, the website immerses users in a cosmic experience, featuring stunning visuals of nebulae and celestial bodies that evoke the wonder of the universe.</p>
@@ -140,68 +139,41 @@
         <!-- Overlay for the admin prompt -->
         <div class="overlay" id="adminOverlay">
             <div class="prompt-content">
-                <div class="admin-prompt" id="adminPromptBox" onclick="toggleAdminPrompt()">Made by Daddy</div>
-                <div class="admin-section" id="adminSection" style="display: none;">
-                    <h2>Admin Login</h2>
-                    <form id="adminForm">
-                        <div class="form-group">
-                            <label for="usernameInput">Username</label>
-                            <input type="text" id="usernameInput" placeholder="Enter username" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="passwordInput">Password</label>
-                            <input type="password" id="passwordInput" placeholder="Enter password" required>
-                        </div>
-                        <button type="submit" aria-label="Submit Admin Login">Login</button>
-                    </form>
-                </div>
+                <h2>Admin Login</h2>
+                <form id="adminForm">
+                    <div class="form-group">
+                        <label for="usernameInput">Username</label>
+                        <input type="text" id="usernameInput" placeholder="Enter username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordInput">Password</label>
+                        <input type="password" id="passwordInput" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit" aria-label="Submit Admin Login">Login</button>
+                </form>
             </div>
         </div>
+
+        <!-- Admin prompt at the bottom -->
+        <div class="admin-prompt" id="adminPromptBox">Made by Daddy</div>
     </main>
+
     <footer>
         <p>&copy; 2023 Galactic Memories. All rights reserved.</p>
     </footer>
-    <script src="../../scripts/scripts.js"></script>
+
     <script>
-        // JavaScript for scroll behavior and admin prompt
-        let lastScrollTop = 0;
-        const header = document.getElementById('main-header');
-        const adminPromptBox = document.getElementById('adminPromptBox');
-        const adminSection = document.getElementById('adminSection');
         const adminOverlay = document.getElementById('adminOverlay');
+        const adminPromptBox = document.getElementById('adminPromptBox');
+        const adminForm = document.getElementById('adminForm');
 
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            // Show/hide header based on scroll direction
-            if (scrollTop > lastScrollTop) {
-                header.style.top = "-60px"; // Hide header
-            } else {
-                header.style.top = "0"; // Show header
-            }
-            lastScrollTop = scrollTop;
-
-            // Show admin prompt box when reaching the bottom of the page
-            if (scrollTop + window.innerHeight >= document.documentElement.scrollHeight) {
-                adminPromptBox.style.display = 'block'; // Show admin prompt
-            } else {
-                adminPromptBox.style.display = 'none'; // Hide admin prompt when not at the bottom
-            }
+        // Show the admin overlay when "Made by Daddy" is clicked
+        adminPromptBox.addEventListener('click', function() {
+            adminOverlay.style.display = 'flex'; // Show overlay
         });
 
-        // Toggle admin prompt visibility
-        function toggleAdminPrompt() {
-            if (adminSection.style.display === 'none') {
-                adminSection.style.display = 'block'; // Show admin section
-                adminOverlay.style.display = 'flex'; // Show overlay
-            } else {
-                adminSection.style.display = 'none'; // Hide                 adminSection.style.display = 'none'; // Hide admin section
-                adminOverlay.style.display = 'none'; // Hide overlay
-            }
-        }
-
         // Handle admin form submission
-        document.getElementById('adminForm').addEventListener('submit', function(event) {
+        adminForm.addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the default form submission
 
             const username = document.getElementById('usernameInput').value;
@@ -216,10 +188,17 @@
             }
 
             // Clear the form
-            document.getElementById('adminForm').reset();
-            adminSection.style.display = 'none'; // Hide the admin section after submission
-            adminOverlay.style.display = 'none'; // Hide overlay
+            adminForm.reset();
+            adminOverlay.style.display = 'none'; // Hide overlay after submission
+        });
+
+        // Close the overlay when clicking outside of the prompt content
+        adminOverlay.addEventListener('click', function(event) {
+            if (event.target === adminOverlay) {
+                adminOverlay.style.display = 'none'; // Hide overlay
+            }
         });
     </script>
 </body>
 </html>
+``
