@@ -4,10 +4,10 @@ body {
     font-family: 'Roboto', sans-serif;
     color: white;
     background: url('https://wallpaper.dog/galaxy-theme-of-planets-wallpapers') no-repeat center center fixed;
-    background-size: cover;
+    background-size: cover; /* Ensures the background covers the entire viewport */
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* Ensures the body takes at least the full height of the viewport */
 }
 
 /* Navigation */
