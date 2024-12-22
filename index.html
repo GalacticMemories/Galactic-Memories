@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galactic Memories - Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Home - Galactic Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Roboto', sans-serif; /* Professional font */
             background-image: url('https://images.hdqwalls.com/download/nebula-planet-space-2n-3840x2400.jpg');
             background-size: cover;
             background-position: center;
             color: white;
             overflow-x: hidden;
+            transition: background-color 0.5s ease; /* Smooth background transition */
         }
         #main-header {
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.8); /* Darker for better contrast */
             padding: 10px;
             position: fixed;
             width: 100%;
             top: 0;
             left: 0;
+            transition: top 0.3s, background-color 0.3s; /* Smooth transitions */
             z-index: 1000;
         }
         nav ul {
@@ -37,6 +39,10 @@
             color: white;
             text-decoration: none;
             font-size: 1.2em;
+            transition: color 0.3s; /* Smooth color transition */
+        }
+        nav ul li a:hover {
+            color: #FFD700; /* Gold color on hover */
         }
         .profile-link {
             position: absolute;
@@ -45,44 +51,122 @@
             display: flex;
             align-items: center;
         }
-        .profile-link img {
+        .profile-picture-container {
+            position: relative;
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            margin-left: 10px;
+            overflow: hidden;
+            background-color: transparent;
+        }
+        .profile-link img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: none; /* Hide by default */
+            transition: opacity 0.3s; /* Smooth opacity transition */
+        }
+        .initials {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2em;
+            color: white;
+            background-color: yellow;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
         main {
             padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
             text-align: center; /* Center align text */
+            animation: fadeIn 1s; /* Fade-in animation for main content */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         h2 {
             font-family: 'Cinzel', serif; /* Elegant font for headings */
             font-size: 2em;
             margin: 20px 0;
         }
-        .description {
-            margin: 20px 0;
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 10px 0;
+            max-width: 800px; /* Limit width for better readability */
+            margin-left: auto;
+            margin-right: auto;
         }
-        .made-by {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 10px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        .license {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 10px;
-            border-radius: 5px;
+        ul {
+            list-style-type: disc;
+            margin: 20px auto;
+            padding-left: 40px; /* Indent list items */
+            max-width: 800px; /* Limit width for better readability */
         }
         footer {
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
             text-align: center;
             padding: 10px;
-            position: relative;
-            bottom: 0;
+            position: relative
+                        bottom: 0;
             width: 100%;
             margin-top: 20px;
+        }
+        /* Overlay for the admin prompt */
+        .overlay {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            z-index: 999; /* Below the prompt but above the content */
+            justify-content: center;
+            align-items: center;
+        }
+        .prompt-content {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .admin-prompt {
+            display: none; /* Initially hidden */
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white; /* Set text color to white */
+            padding: 20px;
+            border-radius: 8px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            text-align: center;
+            cursor: pointer; /* Change cursor to pointer */
         }
     </style>
 </head>
@@ -90,36 +174,135 @@
     <header id="main-header">
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="photos.html">Photos</a></li>
                 <li><a href="albums.html">Albums</a></li>
                 <li><a href="upload.html">Upload</a></li>
                 <li><a href="account.html">Account</a></li>
+                <li><a href="https://galacticmemories.github.io/Universe-Dreams" target="_blank">Universe Dreams</a></li>
+                <li><a href="https://galacticmemories.github.io/Space-memories-/index.html" target="_blank">Space Memories</a></li>
             </ul>
         </nav>
-        <div class="profile-link">
-            <a href="profile.html">Sign In</a>
-            <img src="default-profile.png" alt="Profile Picture"> <!-- Replace with actual profile picture URL -->
-        </div>
     </header>
 
     <main>
         <h2>Welcome to Galactic Memories</h2>
-        <div class="description">
-            <p>Explore the universe through the eyes of our community. Share your photos, create albums, and relive your cosmic adventures.</p>
+        <p>Galactic Memories is an innovative web application designed to serve as a digital sanctuary for users to create, manage, and share their cherished photo albums. With a captivating space theme, the website immerses users in a cosmic experience, featuring stunning visuals of nebulae and celestial bodies that evoke the wonder of the universe.</p>
+
+        <h2>Key Features</h2>
+        <ul>
+            <li>User account management: Create and manage your personal account to keep your memories safe.</li>
+            <li>Seamless photo uploading: Easily upload your favorite photos and videos to your albums.</li>
+            <li>Dynamic album management: Organize your photos into albums for easy access and sharing.</li>
+            <li>Responsive design: Enjoy a seamless experience on all devices, whether on desktop or mobile.</li>
+            <li>Admin access: Authorized users can manage content and user accounts effectively.</li>
+        </ul>
+
+        <h2>User Experience</h2>
+        <p>Upon entering the site, users are greeted with a visually striking header and an overview of the platform's capabilities. The navigation menu is designed for ease of use, allowing quick access to essential sections. The main content area welcomes users with a warm introduction, highlighting features and inviting exploration.</p>
+
+        <h2>Conclusion</h2>
+        <p>Galactic Memories is more than just a photo-sharing platform; it is a cosmic journey through the memories of life. With its stunning space-themed design, user-friendly features, and commitment to community engagement, it provides a unique and memorable experience for all users.</p>
+
+        <!-- Overlay for the admin prompt -->
+        <div class="overlay" id="adminOverlay">
+            <div class="prompt-content">
+                <h2>Admin Login</h2>
+                <form id="adminForm">
+                    <div class="form-group">
+                        <label for="usernameInput">Username</label>
+                                                <input type="text" id="usernameInput" placeholder="Enter username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordInput">Password</label>
+                        <input type="password" id="passwordInput" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit" aria-label="Submit Admin Login">Login</button>
+                </form>
+            </div>
         </div>
 
-        <div class="made-by">
-            <p>Made by Daddy</p>
-        </div>
-
-        <div class="license">
-            <p>License: All rights reserved.</p>
-        </div>
+        <!-- Admin prompt at the bottom -->
+        <div class="admin-prompt" id="adminPromptBox">Made by Daddy</div>
     </main>
 
     <footer>
         <p>&copy; 2023 Galactic Memories. All rights reserved.</p>
     </footer>
+
+    <script>
+        const adminOverlay = document.getElementById('adminOverlay');
+        const adminPromptBox = document.getElementById('adminPromptBox');
+        const adminForm = document.getElementById('adminForm');
+
+        // Show the admin overlay when "Made by Daddy" is clicked
+        adminPromptBox.addEventListener('click', function() {
+            adminOverlay.style.display = 'flex'; // Show overlay
+        });
+
+        // Handle admin form submission
+        adminForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const username = document.getElementById('usernameInput').value;
+            const password = document.getElementById('passwordInput').value;
+
+            // Check credentials
+            if (username === 'admin' && password === 'admin1234567890') {
+                // Redirect to the admin page on successful login
+                window.location.href = 'https://galacticmemories.github.io/Galactic-Memories/admin.html';
+            } else {
+                alert('Invalid username or password.'); // Show error message
+            }
+
+            // Clear the form
+            adminForm.reset();
+            adminOverlay.style.display = 'none'; // Hide overlay after submission
+        });
+
+        // Close the overlay when clicking outside of the prompt content
+        adminOverlay.addEventListener('click', function(event) {
+            if (event.target === adminOverlay) {
+                adminOverlay.style.display = 'none'; // Hide overlay
+            }
+        });
+
+        // Show "Made by Daddy" prompt when scrolling to the bottom
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+
+            // Check if the user has scrolled to the bottom of the page
+            if (scrollPosition >= documentHeight) {
+                adminPromptBox.style.display = 'block'; // Show prompt
+            } else {
+                adminPromptBox.style.display = 'none'; // Hide prompt
+            }
+
+            // Update profile picture or initials
+            const profilePicture = localStorage.getItem('profilePicture');
+            const username = localStorage.getItem('currentUser   '); // Ensure this matches your storage key
+            const initials = username ? username.charAt(0).toUpperCase() : '?'; // Get initials
+
+            const profileLink = document.querySelector('.profile-link img');
+            const initialsContainer = document.createElement('div');
+            initialsContainer.className = 'initials';
+            initialsContainer.textContent = initials;
+
+            if (profilePicture) {
+                profileLink.src = profilePicture; // Set profile picture
+                profileLink.style.display = 'block'; // Show profile picture
+                initialsContainer.style.display = 'none'; // Hide initials
+            } else {
+                profileLink.style.display = 'none'; // Hide profile picture
+                initialsContainer.style.display = 'flex'; // Show initials
+            }
+
+            // Append initials to the profile link container
+            const profileContainer = document.querySelector('.profile-picture-container');
+            profileContainer.innerHTML = ''; // Clear previous content
+            profileContainer.appendChild(initialsContainer); // Add initials
+        });
+    </script>
 </body>
 </html>
