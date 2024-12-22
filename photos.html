@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Gallery - Galactic Memories</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <title>Photos - Galactic Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: 'Roboto', sans-serif; /* Professional font */
+            font-family: 'Roboto', sans-serif;
             background-image: url('https://images.hdqwalls.com/download/nebula-planet-space-2n-3840x2400.jpg');
             background-size: cover;
             background-position: center;
             color: white;
             overflow-x: hidden;
         }
-        header {
+        #main-header {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 10px;
-            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }
         nav ul {
             list-style: none;
             padding: 0;
+            text-align: center;
         }
         nav ul li {
             display: inline;
@@ -33,28 +38,45 @@
             text-decoration: none;
             font-size: 1.2em;
         }
-        .gallery {
+        main {
+            padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
+            text-align: center; /* Center align text */
+        }
+        h2 {
+            font-family: 'Cinzel', serif; /* Elegant font for headings */
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        .photo-gallery {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 20px;
-        }
-        .gallery img {
-            margin: 10px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            width: 200px; /* Adjust size as needed */
-            height: auto;
-        }
-        button {
-            display: block;
             margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: rgba(255, 255, 255, 0.8);
-            border: none;
+            max-width: 800px; /* Limit width for better readability */
+        }
+        .photo-item {
+            margin: 10px;
+            border: 1px solid #ccc;
             border-radius: 5px;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .photo-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .view-button {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .view-button:hover {
+            background-color: #0056b3;
         }
         footer {
             background-color: rgba(0, 0, 0, 0.8);
@@ -69,8 +91,7 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Galactic Memories Photo Gallery</h1>
+    <header id="main-header">
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -78,59 +99,39 @@
                 <li><a href="albums.html">Albums</a></li>
                 <li><a href="upload.html">Upload</a></li>
                 <li><a href="account.html">Account</a></li>
-                <li><a href="admin.html">Admin</a></li>
-                <li><a href="https://galacticmemories.github.io/Universe-Dreams" target="_blank">Universe Dreams</a></li>
-                <li><a href="https://galacticmemories.github.io/Space-memories-/index.html" target="_blank">Space Memories</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Section 1: Introduction -->
     <main>
-        <h2>Welcome to the Photo Gallery</h2>
-        <p>Explore the vast collection of memories captured in stunning visuals. Our gallery showcases photos from various albums, allowing you to relive those special moments.</p>
+        <h2>Photo Gallery</h2>
+        <p>Explore the beautiful memories captured by our users. Click on any photo to view it in full size.</p>
+
+        <div class="photo-gallery">
+            <div class="photo-item">
+                <img src="link_to_photo_1.jpg" alt="Description of Photo 1">
+                <a href="link_to_photo_1.jpg" target="_blank" class="view-button">View Photo 1</a>
+            </div>
+            <div class="photo-item">
+                <img src="link_to_photo_2.jpg" alt="Description of Photo 2">
+                <a href="link_to_photo_2.jpg" target="_blank" class="view-button">View Photo 2</a>
+            </div>
+            <div class="photo-item">
+                                <img src="link_to_photo_3.jpg" alt="Description of Photo 3">
+                <a href="link_to_photo_3.jpg" target="_blank" class="view-button">View Photo 3</a>
+            </div>
+            <div class="photo-item">
+                <img src="link_to_photo_4.jpg" alt="Description of Photo 4">
+                <a href="link_to_photo_4.jpg" target="_blank" class="view-button">View Photo 4</a>
+            </div>
+            <div class="photo-item">
+                <img src="link_to_photo_5.jpg" alt="Description of Photo 5">
+                <a href="link_to_photo_5.jpg" target="_blank" class="view-button">View Photo 5</a>
+            </div>
+            <!-- Add more photos as needed -->
+        </div>
     </main>
 
-    <!-- Section 2: Photo Gallery -->
-    <section>
-        <h2>Gallery</h2>
-        <div id="gallery" class="gallery"></div>
-        <button id="uploadBtn">Upload New Photo</button>
-    </section>
-
-    <!-- Section 3: JavaScript for Fetching Photos -->
-    <script>
-        const albumId = 'YOUR_ALBUM_ID'; // Replace with your actual album ID
-        const apiUrl = `https://google-photos-album-demo.glitch.me/${albumId}`; // Your API endpoint
-
-        // Function to fetch and display images
-        async function fetchPhotos() {
-            try {
-                const response = await fetch(apiUrl);
-                const images = await response.json();
-                const gallery = document.getElementById('gallery');
-
-                images.forEach(image => {
-                    const imgElement = document.createElement('img');                    imgElement.src = `${image}=w1024`; // Original size
-                    imgElement.alt = 'Photo from Google Photos';
-                    gallery.appendChild(imgElement);
-                });
-            } catch (error) {
-                console.error('Error fetching photos:', error);
-            }
-        }
-
-        // Call the function to fetch photos
-        fetchPhotos();
-
-        // Event listener for upload button
-        document.getElementById('uploadBtn').addEventListener('click', function() {
-            alert('Upload functionality is not implemented yet.');
-            // Implement your upload logic here
-        });
-    </script>
-
-    <!-- Section 4: Footer -->
     <footer>
         <p>&copy; 2023 Galactic Memories. All rights reserved.</p>
     </footer>
