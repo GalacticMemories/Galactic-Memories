@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Galactic Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://th.bing.com/th/id/R.cfe69912f91f660692a8baaba44e7770?rik=uEOF1w%2fbErvAYw&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            overflow-x: hidden;
+        }
+        #main-header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        main {
+            padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
+            text-align: center; /* Center align text */
+        }
+        h2 {
+            font-family: 'Cinzel', serif; /* Elegant font for headings */
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        .form-group {
+            margin: 20px 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 300px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .submit-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 20px 0;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="albums.html">Albums</a></li>
+                <li><a href="upload.html">Upload</a></li>
+                <li><a href="account.html">Account</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your Profile</h2>
+        <img id="profilePicture" class="profile-picture" src="default-profile.png" alt="Profile Picture">
+        
+        <div class="form-group">
+            <label for="profilePictureInput">Upload Profile Picture</label>
+            <input type="file" id="profilePictureInput" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+            <label for="usernameDisplay">Username</label>
+            <input type="text" id="usernameDisplay" placeholder="Your username" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="backupSettings">Backup Settings</label>
+            <select id="backupSettings">
+                <option value="none">No Backup</option>
+                <option value="mobile">Backup from Mobile Devices</option>
+                                <option value="cloud">Backup to Cloud</option>
+            </select>
+        </div>
+
+        <button class="submit-button" id="saveButton">Save Changes</button>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Galactic Memories. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Load user data from local storage
+        window.onload = function() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const currentUsername = localStorage.getItem('currentUser ');
+
+            const user = users.find(user => user.username === currentUsername);
+            if (user) {
+                document.getElementById('usernameDisplay').value = user.username;
+            }
+        };
+
+        // Handle profile picture upload
+        document.getElementById('profilePictureInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profilePicture').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Save changes (this can be expanded to save settings)
+        document.getElementById('saveButton').addEventListener('click', function() {
+            const backupSetting = document.getElementById('backupSettings').value;
+            alert(`Settings saved! Backup option: ${backupSetting}`);
+            // Here you can implement saving the backup setting to local storage or a backend
+        });
+    </script>
+</body>
+</html>
