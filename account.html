@@ -97,10 +97,29 @@
     </header>
 
     <main>
-        <h2>Sign In</h2>
-        <div id="signinForm">
+        <h2>Sign Up / Sign In</h2>
+        
+        <div id="signupForm">
+            <h3>Sign Up</h3>
             <div class="form-group">
-                <label for="signinUsername">Username</label>
+                <label for="signupUsername">Username</label>
+                <input type="text" id="signupUsername" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" placeholder="Enter your password" required>
+            </div>
+            <button class="submit-button" id="signupButton">Create Account</button>
+        </div>
+
+        <div id="signinForm" style="margin-top: 40px;">
+            <h3>Sign In</h3>
+            <div class="form-group">
+                                <label for="signinUsername">Username</label>
                 <input type="text" id="signinUsername" placeholder="Enter your username" required>
             </div>
             <div class="form-group">
@@ -112,14 +131,42 @@
     </main>
 
     <footer>
-        <p>&copy; 2023 Galactic Memories. All rights reserved.</p>
+        <p>&copy; 2024 Galactic Memories. All rights reserved.</p>
     </footer>
 
     <script>
+        // Function to handle user sign-up
+        document.getElementById('signupButton').addEventListener('click', function() {
+            const username = document.getElementById('signupUsername').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            // Retrieve users from local storage
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Check if the username already exists
+            const existingUser  = users.find(user => user.username === username);
+            if (existingUser ) {
+                alert('Username already exists. Please choose a different username.');
+                return;
+            }
+
+            // Create a new user object
+            const newUser  = { username, email, password };
+            users.push(newUser ); // Add the new user to the array
+
+            // Save the updated users array to local storage
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert('Account created successfully! Redirecting to your profile...');
+            localStorage.setItem('currentUser ', username); // Store the current user's username
+            window.location.href = 'profile.html'; // Redirect to profile page
+        });
+
         // Function to handle user sign-in
         document.getElementById('signinButton').addEventListener('click', function() {
             const username = document.getElementById('signinUsername').value;
-                        const password = document.getElementById('signinPassword').value;
+            const password = document.getElementById('signinPassword').value;
 
             // Retrieve users from local storage
             let users = JSON.parse(localStorage.getItem('users')) || [];
@@ -127,9 +174,7 @@
 
             if (user) {
                 alert('Sign in successful!');
-                // Store the current user's username in local storage
-                localStorage.setItem('currentUser ', username);
-                // Change the title and redirect to the profile page
+                localStorage.setItem('currentUser ', username); // Store the current user's username
                 window.location.href = 'profile.html'; // Redirect to profile page
             } else {
                 alert('Invalid username or password. Please try again.');
