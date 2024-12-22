@@ -44,7 +44,7 @@
         }
         h2 {
             font-family: 'Cinzel', serif; /* Elegant font for headings */
-            font-size: 2em;
+            font-size: 2.5em;
             margin: 20px 0;
         }
         .upload-form {
@@ -53,7 +53,8 @@
             text-align: left;
             background-color: rgba(255, 255, 255, 0.1);
             padding: 20px;
-            border-radius: 5px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
         .upload-form input[type="file"] {
             width: 100%;
@@ -66,6 +67,7 @@
             padding: 10px;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
         }
         .upload-form button:hover {
             background-color: #218838;
@@ -73,6 +75,18 @@
         #uploadStatus {
             margin-top: 10px;
             color: yellow;
+        }
+        #progressBar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            overflow: hidden;
+            display: none;
+        }
+        #progressBar div {
+            height: 20px;
+            background-color: #4caf50;
+            width: 0;
         }
         .media-gallery {
             margin-top: 20px;
@@ -118,7 +132,32 @@
             position: relative;
             bottom: 0;
             width: 100%;
-            margin-top: 20px;
+                        margin-top: 20px;
+        }
+        /* Styles for the mobile backup prompt */
+        .backup-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-image: url('https://cdn.mos.cms.futurecdn.net/rwow8CCG3C3GrqHGiK8qcJ-1200-80.jpg');
+            background-size: cover;
+            color: black;
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .backup-prompt button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .backup-prompt button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
         }
     </style>
 </head>
@@ -130,18 +169,19 @@
                 <li><a href="photos.html" class="active">Photos</a></li>
                 <li><a href="albums.html">Albums</a></li>
                 <li><a href="upload.html">Upload</a></li>
-                                <li><a href="account.html">Account</a></li>
+                <li><a href="account.html">Account</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <h2>Upload Photos</h2>
-        <p>Select a photo to upload to your Google Photos library.</p>
+        <p>Select one or more photos to upload to your Google Photos library.</p>
 
         <div class="upload-form">
-            <input type="file" id="fileInput" accept="image/*" />
+            <input type="file" id="fileInput" accept="image/*" multiple />
             <button id="uploadButton">Upload</button>
+            <div id="progressBar"><div></div></div>
             <p id="uploadStatus"></p>
         </div>
 
@@ -159,115 +199,120 @@
         const uploadButton = document.getElementById('uploadButton');
         const fileInput = document.getElementById('fileInput');
         const uploadStatus = document.getElementById('uploadStatus');
-        const mediaGallery = document.getElementById('mediaGallery');
+        const progressBar = document.getElementById('progressBar').firstElementChild;
         const timeline = document.getElementById('timeline');
 
         // Replace with your actual OAuth 2.0 access token
         const accessToken = 'YOUR_OAUTH_ACCESS_TOKEN';
 
         uploadButton.addEventListener('click', async () => {
-            const file = fileInput.files[0];
-            if (!file) {
-                uploadStatus.textContent = 'Please select a file to upload.';
-                return;
-            }
-
-            // File validation
-            const maxFileSize = 200 * 1024 * 1024; // 200 MB
-            const acceptedFileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/tiff', 'image/bmp', 'image/heic'];
-
-            if (!acceptedFileTypes.includes(file.type)) {
-                uploadStatus.textContent = 'Unsupported file type. Please upload an image.';
-                return;
-            }
-
-            if (file.size > maxFileSize) {
-                uploadStatus.textContent = 'File size exceeds the maximum limit of 200 MB.';
+            const files = fileInput.files;
+            if (files.length === 0) {
+                uploadStatus.textContent = 'Please select at least one file to upload.';
                 return;
             }
 
             // Show loading status
             uploadStatus.textContent = 'Uploading...';
+            progressBar.style.display = 'block';
+            progressBar.style.width = '0%';
 
-            try {
+            for (const file of files) {
+                // File validation
+                const maxFileSize = 200 * 1024 * 1024; // 200 MB
+                const acceptedFileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/tiff', 'image/bmp', 'image/heic'];
+
+                if (!acceptedFileTypes.includes(file.type)) {
+                    uploadStatus.textContent = `Unsupported file type for ${file.name}. Please upload an image.`;
+                    continue;
+                }
+
+                if (file.size > maxFileSize) {
+                    uploadStatus.textContent = `File size exceeds the maximum limit of 200 MB for ${file.name}.`;
+                    continue;
+                }
+
                 // Step 1: Upload bytes to Google Photos
-                const uploadResponse = await fetch('https://photoslibrary.googleapis.com/v1/uploads', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`,
-                        'Content-Type': 'application/octet-stream',
-                        'X-Goog-Upload-Content-Type': file.type,
-                        'X-Goog-Upload-Protocol': 'raw'
-                    },
-                    body: file
-                });
+                try {
+                    const uploadResponse = await fetch('https://photoslibrary.googleapis.com/v1/uploads', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                            'Content-Type': 'application/octet-stream',
+                            'X-Goog-Upload-Content-Type': file.type,
+                            'X-Goog-Upload-Protocol': 'raw'
+                        },
+                        body: file
+                    });
 
-                if (!uploadResponse.ok) {
-                    throw new Error('Upload failed: ' + uploadResponse.statusText);
+                    if (!uploadResponse.ok) {                        throw new Error('Upload failed: ' + uploadResponse.statusText);
+                    }
+
+                    const uploadToken = await uploadResponse.text();
+                    uploadStatus.textContent = `Upload successful for ${file.name}!`;
+
+                    // Step 2: Create media item in the user's library
+                    const mediaItemResponse = await fetch('https://photoslibrary.googleapis.com/v1/mediaItems:batchCreate', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            newMediaItems: [{
+                                description: file.name,
+                                simpleMediaItem: {
+                                    uploadToken: uploadToken
+                                }
+                            }]
+                        })
+                    });
+
+                    if (!mediaItemResponse.ok) {
+                        throw new Error('Media item creation failed: ' + mediaItemResponse.statusText);
+                    }
+
+                    const mediaItemResult = await mediaItemResponse.json();
+                    console.log('Media item created:', mediaItemResult);
+
+                    // Display the uploaded photo in the timeline
+                    const mediaItem = mediaItemResult.newMediaItemResults[0].mediaItem;
+                    const mediaDate = new Date(mediaItem.mediaMetadata.creationTime);
+                    const dateString = mediaDate.toLocaleDateString();
+
+                    // Create a timeline item
+                    const timelineItem = document.createElement('div');
+                    timelineItem.className = 'timeline-item';
+                    timelineItem.innerHTML = `
+                        <h4>${dateString}</h4>
+                        <div class="media-item">
+                            <img src="${mediaItem.baseUrl}=w300-h300" alt="${mediaItem.description}">
+                            <p>${mediaItem.description}</p>
+                        </div>
+                    `;
+                    timeline.appendChild(timelineItem);
+
+                    // Update progress bar
+                    const progressPercentage = ((Array.from(files).indexOf(file) + 1) / files.length) * 100;
+                    progressBar.style.width = `${progressPercentage}%`;
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    uploadStatus.textContent = 'Error: ' + error.message;
                 }
+            }
 
-                const uploadToken = await uploadResponse.text();
-                uploadStatus.textContent = 'Upload successful!';
-
-                // Step 2: Create media item in the user's library
-                const mediaItemResponse = await fetch('https://photoslibrary.googleapis.com/v1/mediaItems:batchCreate', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        newMediaItems: [{
-                            description: 'Uploaded Photo',
-                            simpleMediaItem: {
-                                uploadToken: uploadToken
-                            }
-                        }]
-                    })
-                });
-
-                if (!mediaItemResponse.ok) {
-                    throw new Error('Media item creation failed: ' + mediaItemResponse.statusText);
-                }
-
-                const mediaItemResult = await mediaItemResponse.json();
-                console.log('Media item created:', mediaItemResult);
-
-                // Display the uploaded photo in the gallery
-                const mediaItem = mediaItemResult.newMediaItemResults[0].mediaItem;
-                const mediaDate = new Date(mediaItem.mediaMetadata.creationTime);
-                const dateString = mediaDate.toLocaleDateString();
-
-                // Create a timeline item
-                const timelineItem = document.createElement('div');
-                timelineItem.className = 'timeline-item';
-                timelineItem.innerHTML = `
-                    <h4>${dateString}</h4>
-                    <div class="media-item">
-                        <img src="${mediaItem.baseUrl}=w300-h300" alt="${mediaItem.description}">
-                        <p>${mediaItem.description}</p>
-                    </div>
-                `;
-                timeline.appendChild(timelineItem);
-
-            } catch (error) {
-                console.error('Error:', error);
-                uploadStatus.textContent = 'Error: ' + error.message;
-                        }
+            // Hide progress bar after all uploads
+            setTimeout(() => {
+                progressBar.style.display = 'none';
+                uploadStatus.textContent = 'All uploads completed!';
+            }, 1000);
         });
 
         // Mobile Backup Functionality
         function promptMobileBackup() {
             const backupPrompt = document.createElement('div');
-            backupPrompt.style.position = 'fixed';
-            backupPrompt.style.bottom = '20px';
-            backupPrompt.style.left = '50%';
-            backupPrompt.style.transform = 'translateX(-50%)';
-            backupPrompt.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-            backupPrompt.style.color = 'black';
-            backupPrompt.style.padding = '15px';
-            backupPrompt.style.borderRadius = '5px';
-            backupPrompt.style.zIndex = '1000';
+            backupPrompt.className = 'backup-prompt';
             backupPrompt.innerHTML = `
                 <p>Would you like to back up your media from your mobile device?</p>
                 <button id="connectMobileStorage">Connect to Mobile Storage</button>
