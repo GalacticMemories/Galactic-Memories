@@ -116,9 +116,9 @@
             border-radius: 5px;
         }
         .admin-prompt {
-                        display: none; /* Initially hidden */
+            display: none; /* Initially hidden */
             background-color: rgba(0, 0, 0, 0.8);
-            color: white; /* Set text color to white */
+                        color: white; /* Set text color to white */
             padding: 10px 20px; /* Adjust padding */
             border-radius: 8px;
             position: fixed; /* Fixed position */
@@ -199,9 +199,9 @@
             adminOverlay.style.display = 'flex'; // Show overlay
         });
 
-                // Handle admin form submission
+        // Handle admin form submission
         adminForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
+                        event.preventDefault(); // Prevent the default form submission
 
             const username = document.getElementById('usernameInput').value;
             const password = document.getElementById('passwordInput').value;
