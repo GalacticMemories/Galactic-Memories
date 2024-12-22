@@ -116,10 +116,10 @@
     </footer>
 
     <script>
-                // Function to handle user sign-in
+        // Function to handle user sign-in
         document.getElementById('signinButton').addEventListener('click', function() {
             const username = document.getElementById('signinUsername').value;
-            const password = document.getElementById('signinPassword').value;
+                        const password = document.getElementById('signinPassword').value;
 
             // Retrieve users from local storage
             let users = JSON.parse(localStorage.getItem('users')) || [];
@@ -127,7 +127,9 @@
 
             if (user) {
                 alert('Sign in successful!');
-                // Redirect to the profile page
+                // Store the current user's username in local storage
+                localStorage.setItem('currentUser ', username);
+                // Change the title and redirect to the profile page
                 window.location.href = 'profile.html'; // Redirect to profile page
             } else {
                 alert('Invalid username or password. Please try again.');
