@@ -1,48 +1,39 @@
 /* General Styles */
 body {
     margin: 0;
+    padding: 0;
     font-family: 'Roboto', sans-serif;
     color: white;
-    background: url('https://wallpaper.dog/galaxy-theme-of-planets-wallpapers') no-repeat center center fixed;
-    background-size: cover; /* Ensures the background covers the entire viewport */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensures the body takes at least the full height of the viewport */
+    background: url('https://myastrology.com/wp-content/uploads/2023/06/planets-of-the-solar-system-1.jpg') no-repeat center center fixed; /* Space background image */
+    background-size: cover;
 }
 
-/* Navigation */
 header {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 1rem;
     position: fixed;
-    width: 100%;
     top: 0;
     left: 0;
-    z-index: 1000;
-    transition: top 0.3s;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for header */
+    padding: 20px;
+    text-align: center;
+    z-index: 1000; /* Ensure header is above other content */
 }
 
 nav ul {
     list-style: none;
-    display: flex;
-    justify-content: space-around;
     padding: 0;
-    margin: 0;
 }
 
-nav a {
-    color: white;
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff;
     text-decoration: none;
-    font-size: 1.2rem;
-    font-family: 'Cinzel', serif;
-    transition: color 0.3s;
 }
 
-nav a:hover {
-    color: #FFD700;
-}
-
-/* Hero Section */
 .hero {
     text-align: center;
     padding: 6rem 1rem;
@@ -50,13 +41,6 @@ nav a:hover {
     margin-top: 4rem;
 }
 
-.hero h1 {
-    font-size: 3rem;
-    margin: 0;
-    font-family: 'Cinzel', serif;
-}
-
-/* Dynamic Photos Section */
 #dynamicPhotos {
     display: flex;
     justify-content: space-around;
@@ -75,55 +59,100 @@ nav a:hover {
     font-size: 18px;
 }
 
+/* Albums Section */
+.albums-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.album-item {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative; /* Required for overlay positioning */
+}
+
+.album-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.album-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2em;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.album-item:hover .album-overlay {
+    opacity: 1;
+}
+
+/* Admin Prompt */
+.admin-prompt {
+    display: none; /* Initially hide the admin prompt */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1002; /* Ensure prompt is above other content */
+}
+
+.admin-prompt input {
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.admin-prompt button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: yellow;
+    border: none;
+    cursor: pointer;
+}
+
+/* Black Box */
+.black-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    display: none; /* Initially hide the black box */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2rem;
     }
 
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-
     #dynamicPhotos {
         flex-direction: column;
         align-items: center;
     }
-}
 
-/* Fullscreen View */
-.fullscreen-view {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
-.fullscreen-view.active {
-    display: flex;
-}
-
-.fullscreen-view img {
-    max-width: 90%;
-    max-height: 90vh;
-    object-fit: contain;
-}
-
-.close-fullscreen {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    background: none;
-    border: none;
+    .albums-grid {
+        grid-template-columns: 1fr; /* Stack albums on smaller screens */
+    }
 }
