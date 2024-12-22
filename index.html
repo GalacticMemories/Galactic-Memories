@@ -106,7 +106,7 @@
             border-radius: 5px;
         }
         .admin-prompt {
-            display: block; /* Always show the prompt */
+            display: none; /* Initially hidden */
             background-color: rgba(0, 0, 0, 0.8);
             color: white; /* Set text color to white */
             padding: 20px;
@@ -124,8 +124,8 @@
 <body>
     <header id="main-header">
         <nav>
-            <ul>
-                                <li><a href="index.html" class="active">Home</a></li>
+                        <ul>
+                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="photos.html">Photos</a></li>
                 <li><a href="albums.html">Albums</a></li>
                 <li><a href="upload.html">Upload</a></li>
@@ -203,10 +203,10 @@
                 // Redirect to the admin page on successful login
                 window.location.href = 'https://galacticmemories.github.io/Galactic-Memories/admin.html';
             } else {
-                alert('Invalid username or password.'); // Show error message
+                                alert('Invalid username or password.'); // Show error message
             }
 
-                       // Clear the form
+            // Clear the form
             adminForm.reset();
             adminOverlay.style.display = 'none'; // Hide overlay after submission
         });
@@ -215,6 +215,19 @@
         adminOverlay.addEventListener('click', function(event) {
             if (event.target === adminOverlay) {
                 adminOverlay.style.display = 'none'; // Hide overlay
+            }
+        });
+
+        // Show "Made by Daddy" prompt when scrolling to the bottom
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+
+            // Check if the user has scrolled to the bottom of the page
+            if (scrollPosition >= documentHeight) {
+                adminPromptBox.style.display = 'block'; // Show prompt
+            } else {
+                adminPromptBox.style.display = 'none'; // Hide prompt
             }
         });
     </script>
