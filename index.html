@@ -10,59 +10,48 @@
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            color: white;
-            background: url('https://images.hdqwalls.com/download/nebula-planet-space-2n-3840x2400.jpg') no-repeat center center fixed; /* Space background image */
+            background-image: url('https://images.hdqwalls.com/download/nebula-planet-space-2n-3840x2400.jpg');
             background-size: cover;
+            background-position: center;
+            color: white;
             overflow-x: hidden;
         }
         #main-header {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
             position: fixed;
             width: 100%;
             top: 0;
             left: 0;
             transition: top 0.3s;
             z-index: 1000;
-            text-align: center;
         }
         nav ul {
             list-style: none;
             padding: 0;
-            margin: 0;
+            text-align: center;
         }
         nav ul li {
             display: inline;
-            margin: 0 15px;
+            margin-right: 20px;
         }
         nav ul li a {
             color: white;
             text-decoration: none;
             font-size: 1.2em;
         }
-        h1 {
-            color: blue; /* Title color */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
-            margin: 0;
-        }
-        h2 {
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
-            margin-top: 40px;
-        }
-        main {
-            padding: 100px 20px 20px; /* Add padding to avoid content being hidden behind the fixed header */
-            text-align: center; /* Center align text */
-        }
-        .admin-section {
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 8px;
-            margin: 20px auto;
+        .admin-prompt {
             display: none; /* Initially hidden */
-            width: 300px; /* Fixed width for admin section */
-            position: relative;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white; /* Set text color to white */
+            padding: 20px;
+            border-radius: 8px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
+            text-align: center;
         }
         .form-group {
             margin-bottom: 15px;
@@ -80,31 +69,10 @@
         .gallery {
             margin-top: 20px;
         }
-        footer {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            margin-top: 20px;
-        }
-        ul {
-            list-style-type: none; /* Remove bullet points */
-            padding: 0;
-            margin: 0;
-            text-align: left; /* Align list items to the left */
-            display: inline-block; /* Center the list */
-        }
-        li {
-            margin: 10px 0; /* Add space between list items */
-        }
     </style>
 </head>
 <body>
     <header id="main-header">
-        <h1 id="title">Galactic Memories</h1>
         <nav>
             <ul>
                 <li><a href="index.html" class="active">Home</a></li>
@@ -113,31 +81,10 @@
                 <li><a href="upload.html">Upload</a></li>
                 <li><a href="account.html">Account</a></li>
                 <li><a href="admin.html">Admin</a></li>
-                <li><a href="https://galacticmemories.github.io/Universe-Dreams" target
-                                        <li><a href="https://galacticmemories.github.io/Universe-Dreams" target="_blank">Universe Dreams</a></li> <!-- New Link -->
-                <li><a href="https://galacticmemories.github.io/Space-memories-/index.html" target="_blank">Space Memories</a></li> <!-- New Link -->
             </ul>
         </nav>
     </header>
     <main>
-        <h2>Welcome to Galactic Memories</h2>
-        <p>Galactic Memories is an innovative web application that serves as a digital sanctuary for users to create, manage, and share their cherished photo albums. Designed with a captivating space theme, the website immerses users in a cosmic experience, featuring stunning visuals of nebulae and celestial bodies that evoke the wonder of the universe.</p>
-
-        <h2>Key Features</h2>
-        <ul>
-            <li>User account management</li>
-            <li>Seamless photo uploading</li>
-            <li>Dynamic album management</li>
-            <li>Responsive design for all devices</li>
-            <li>Admin access for authorized users</li>
-        </ul>
-
-        <h2>User Experience</h2>
-        <p>Upon entering the site, users are greeted with a visually striking header and an overview of the platform's capabilities. The navigation menu is designed for ease of use, allowing quick access to essential sections. The main content area welcomes users with a warm introduction, highlighting features and inviting exploration.</p>
-
-        <h2>Conclusion</h2>
-        <p>Galactic Memories is more than just a photo-sharing platform; it is a cosmic journey through the memories of life. With its stunning space-themed design, user-friendly features, and commitment to community engagement, it provides a unique and memorable experience for all users.</p>
-
         <section class="admin-section" id="adminPrompt">
             <h2>Admin Login</h2>
             <form id="adminForm">
@@ -149,10 +96,13 @@
                     <label for="passwordInput">Password</label>
                     <input type="password" id="passwordInput" placeholder="Enter password" required>
                 </div>
-                <button type="submit" aria-label="Submit Admin Login">View Gallery</button>
+                <button type="submit">View Gallery</button>
             </form>
             <div id="galleryDisplay" class="gallery"></div>
         </section>
+
+        <!-- Admin Prompt Box -->
+        <div class="admin-prompt" id="adminPromptBox">Made by Daddy</div>
     </main>
     <footer>
         <p>&copy; 2023 Galactic Memories. All rights reserved.</p>
@@ -162,10 +112,10 @@
         // JavaScript for scroll behavior and admin prompt
         let lastScrollTop = 0;
         const header = document.getElementById('main-header');
-        const adminPrompt = document.getElementById('adminPrompt');
+        const adminPromptBox = document.getElementById('adminPromptBox');
 
         window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollTop = window.pageYOffset || document            .documentElement.scrollTop;
 
             // Show/hide header based on scroll direction
             if (scrollTop > lastScrollTop) {
@@ -175,11 +125,11 @@
             }
             lastScrollTop = scrollTop;
 
-            // Show admin prompt when reaching the bottom of the page
+            // Show admin prompt box when reaching the bottom of the page
             if (scrollTop + window.innerHeight >= document.documentElement.scrollHeight) {
-                adminPrompt.style.display = 'block'; // Show admin prompt
+                adminPromptBox.style.display = 'block'; // Show admin prompt
             } else {
-                adminPrompt.style.display = 'none'; // Hide admin prompt when not at the bottom
+                adminPromptBox.style.display = 'none'; // Hide admin prompt when not at the bottom
             }
         });
 
@@ -198,7 +148,7 @@
             // Optionally, you can display the gallery or redirect to another page
             // For now, we'll just clear the form
             document.getElementById('adminForm').reset();
-            adminPrompt.style.display = 'none'; // Hide the admin prompt after submission
+            adminPromptBox.style.display = 'none'; // Hide the admin prompt after submission
         });
     </script>
 </body>
